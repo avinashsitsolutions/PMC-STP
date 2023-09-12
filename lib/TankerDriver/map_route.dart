@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/builder/constants.dart';
+import 'package:tankerpcmc/widgets/constants.dart';
 import 'package:tankerpcmc/widgets/appbar.dart';
 import 'package:tankerpcmc/widgets/drawerwidget.dart';
 

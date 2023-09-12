@@ -260,7 +260,7 @@ class _TankerListState extends State<TankerList> {
           ),
         ),
         height: 70, // Adjust the height of the image
-      ), 
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:async';
 import 'dart:io';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'dart:typed_data';
 // ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart';
@@ -74,6 +76,32 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
       isLoading = false;
     });
     return data;
+  }
+
+  String getGoogleMapsUrl(
+      double originLat, double originLng, double destLat, double destLng) {
+    final apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    final url =
+        'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&key=$apiKey';
+    return url;
+  }
+
+  getDirections(double originLat, double originLng, double destLat,
+      double destLng) async {
+    const apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    final apiUrl = 'https://maps.googleapis.com/maps/api/directions/json?'
+        'origin=$originLat,$originLng'
+        '&destination=$destLat,$destLng'
+        '&key=$apiKey';
+
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(data);
+    } else {
+      throw Exception('Failed to load directions');
+    }
   }
 
   bool isSnackbarVisible = false;
@@ -251,12 +279,6 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     _captureAndSave();
-      //   },
-      //   child: Icon(Icons.save),
-      // ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: Appbarwid(),
@@ -325,8 +347,21 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                               itemCount: _dataList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final data = _dataList[index];
-                                // print(data.toString());
+                                print(data.toString());
                                 String dateString = data['created_at'];
+                                final projectLat = double.tryParse(
+                                        data["ni_project_lat"] ?? "0.0") ??
+                                    0.0;
+                                final projectLong = double.tryParse(
+                                        data["ni_project_long"] ?? "0.0") ??
+                                    0.0;
+                                final stpLat = double.tryParse(
+                                        data["ni_stp_lat"] ?? "0.0") ??
+                                    0.0;
+                                final stpLong = double.tryParse(
+                                        data["ni_stp_long"] ?? "0.0") ??
+                                    0.0;
+
                                 DateTime date = DateTime.parse(dateString);
                                 String formattedDate =
                                     DateFormat('dd-MM-yyyy').format(date);
@@ -344,7 +379,6 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                           width: 2,
                                         ),
                                       ),
-                                      // height: MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
                                       child: Stack(children: [
                                         Column(
@@ -895,34 +929,50 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                             ),
                                           ],
                                         ),
-                                        // if (status.toString() == "false")
-                                        Positioned(
-                                          right: 10,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      MapRoute(
-                                                    startlocation: LatLng(
-                                                        18.504179731116604,
-                                                        73.92576544341128),
-                                                    endlocation: LatLng(
-                                                        18.506243585308,
-                                                        73.9060876218711),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text("Route"),
-                                                Icon(Icons.location_on)
-                                              ],
+                                        if (status.toString() == "false")
+                                          Positioned(
+                                            right: 10,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                print(stpLat);
+                                                print(stpLong);
+                                                print(projectLong);
+                                                print(projectLat);
+                                                String googleMapsUrl =
+                                                    getGoogleMapsUrl(
+                                                  stpLat,
+                                                  stpLong,
+                                                  projectLong,
+                                                  projectLat,
+                                                );
+                                                // ignore: deprecated_member_use
+                                                launch(googleMapsUrl);
+
+                                                // Navigator.push(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //     builder: (context) =>
+                                                //         MapRoute(
+                                                //       startlocation: LatLng(
+                                                //           double.parse(
+                                                //               projectLong),
+                                                //           double.parse(
+                                                //               projectLat)),
+                                                //       endlocation: LatLng(
+                                                //           double.parse(stpLat),
+                                                //           double.parse(stpLong)),
+                                                //     ),
+                                                //   ),
+                                                // );
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Text("Route"),
+                                                  Icon(Icons.location_on)
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
                                       ]),
                                     ),
                                   ),
