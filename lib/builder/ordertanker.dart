@@ -70,8 +70,31 @@ class _OrderTankerState extends State<OrderTanker> {
   //   return categoryItemlist1;
   //   // print(categoryItemlist1);
   // }
+  calculateRoadDistance(double originLat, double originLng, double destLat,
+      double destLng) async {
+    String url = "https://maps.googleapis.com/maps/api/directions/json" +
+        "?origin=$originLat,$originLng" +
+        "&destination=$destLat,$destLng" +
+        "&key=AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE";
 
-  Future getAllcap() async {
+    final response = await http.get(Uri.parse(url));
+    print(response.body);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['status'] == 'OK') {
+        // Extracting the road distance in meters from the response
+        double roadDistanceInMeters =
+            data['routes'][0]['legs'][0]['distance']['value'] / 1000;
+        return roadDistanceInMeters;
+      } else {
+        throw Exception('Failed to fetch directions');
+      }
+    } else {
+      throw Exception('Failed to connect to the server');
+    }
+  }
+
+  Future  getAllcap() async {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
@@ -470,13 +493,17 @@ class _OrderTankerState extends State<OrderTanker> {
                                   dropdownvalue = newVal;
                                 });
                                 setState(() {});
-                                stplatlong(dropdownvalue).then((data) {
+                                stplatlong(dropdownvalue).then((data) async {
                                   lat2 = double.parse(data['lat']);
                                   long2 = double.parse(data['long']);
 
                                   coordinate1 = LatLng(
                                       lat1, long1); // Example coordinates
                                   coordinate2 = LatLng(lat2, long2);
+
+                                  //     calculateRoadDistance(
+                                  //         lat2, long2, lat1, long1);
+
                                   double distanceInMeters =
                                       distanceBetween(coordinate1, coordinate2);
                                   double distanceInKilometers =

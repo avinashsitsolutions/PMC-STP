@@ -79,7 +79,7 @@ class _NewOrderState extends State<NewOrder> {
     });
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
-    // print(token);
+    print(id);
     final response = await http.post(
       Uri.parse(
           'https://pcmcstp.stockcare.co.in/public/api/tanker_owner_orders_recipt_new'),

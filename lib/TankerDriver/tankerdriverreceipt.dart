@@ -86,24 +86,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
     return url;
   }
 
-  getDirections(double originLat, double originLng, double destLat,
-      double destLng) async {
-    const apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
-    final apiUrl = 'https://maps.googleapis.com/maps/api/directions/json?'
-        'origin=$originLat,$originLng'
-        '&destination=$destLat,$destLng'
-        '&key=$apiKey';
-
-    final response = await http.get(Uri.parse(apiUrl));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      print(data);
-    } else {
-      throw Exception('Failed to load directions');
-    }
-  }
-
+// https://www.google.com/maps/dir/?api=1&origin=18.6422,73.748&destination=18.629821046666656,73.79543323069811&key=AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE
   bool isSnackbarVisible = false;
   bool status1 = false;
   Future getPendingorder() async {
@@ -350,10 +333,12 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                 print(data.toString());
                                 String dateString = data['created_at'];
                                 final projectLat = double.tryParse(
-                                        data["ni_project_lat"] ?? "0.0") ??
+                                        data["ni_project_lat"] ??
+                                            data["ni_society_lat"]) ??
                                     0.0;
                                 final projectLong = double.tryParse(
-                                        data["ni_project_long"] ?? "0.0") ??
+                                        data["ni_project_long"] ??
+                                            data["ni_society_long"]) ??
                                     0.0;
                                 final stpLat = double.tryParse(
                                         data["ni_stp_lat"] ?? "0.0") ??
@@ -934,16 +919,12 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                             right: 10,
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                print(stpLat);
-                                                print(stpLong);
-                                                print(projectLong);
-                                                print(projectLat);
                                                 String googleMapsUrl =
                                                     getGoogleMapsUrl(
                                                   stpLat,
                                                   stpLong,
-                                                  projectLong,
                                                   projectLat,
+                                                  projectLong,
                                                 );
                                                 // ignore: deprecated_member_use
                                                 launch(googleMapsUrl);
