@@ -6,11 +6,10 @@ class BuilderRegistration extends StatefulWidget {
 
   @override
   State<BuilderRegistration> createState() => _BuilderRegistrationState();
-}
+} 
 
 class _BuilderRegistrationState extends State<BuilderRegistration> {
   final _formKey = GlobalKey<FormState>();
-  // final List<String> _tankerOptions = ['Tanker 1', 'Tanker 2', 'Tanker 3'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

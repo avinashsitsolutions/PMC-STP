@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpcmc/TankerDriver/map_route.dart';
 import 'package:tankerpcmc/builder/builderservices.dart';
 import 'package:tankerpcmc/pmc/gmap.dart';
 import 'package:tankerpcmc/builder/list.dart';
@@ -11,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderTanker extends StatefulWidget {
   const OrderTanker({
@@ -94,7 +96,15 @@ class _OrderTankerState extends State<OrderTanker> {
     }
   }
 
-  Future  getAllcap() async {
+  String getGoogleMapsUrl(
+      double originLat, double originLng, double destLat, double destLng) {
+    final apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    final url =
+        'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&key=$apiKey';
+    return url;
+  }
+
+  Future getAllcap() async {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
@@ -510,7 +520,6 @@ class _OrderTankerState extends State<OrderTanker> {
                                       distanceInMeters / 1000;
                                   distance = distanceInKilometers.toString();
                                   // print(distanceInKilometers);
-
                                   result = Builderservices().calculateCost1(
                                       distanceInKilometers,
                                       liter,
@@ -564,9 +573,6 @@ class _OrderTankerState extends State<OrderTanker> {
                                       dropdownvalue,
                                     ).then((data) {
                                       if (data['error'] == false) {
-                                        // setState(() {
-                                        //   _isLoading = false;
-                                        // });
                                         List<dynamic> list = data['tanker'];
                                         Navigator.pushReplacement(
                                             context,
@@ -629,13 +635,23 @@ class _OrderTankerState extends State<OrderTanker> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Mapline(
-                              endlocation: coordinate2,
-                              startlocation: coordinate1,
-                            )));
+                print(coordinate2.latitude);
+                String googleMapsUrl = getGoogleMapsUrl(
+                  coordinate2.latitude,
+                  coordinate2.longitude,
+                  coordinate1.latitude,
+                  coordinate1.longitude,
+                );
+
+                // ignore: deprecated_member_use
+                launch(googleMapsUrl);
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => Mapline(
+                //               endlocation: coordinate2,
+                //               startlocation: coordinate1,
+                //             )));
               },
               icon: const Icon(Icons.arrow_forward),
               label: const Text('Check distance on Map'),
@@ -646,11 +662,10 @@ class _OrderTankerState extends State<OrderTanker> {
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
+            image: AssetImage('assets/bottomimage.png'),
           ),
         ),
-        height: 70, // Adjust the height of the image
+        height: 70,
       ),
     );
   }

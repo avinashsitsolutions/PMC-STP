@@ -15,7 +15,7 @@ class Builderservices {
         "id": id,
         "ni_project_name": projectname,
         'ni_rera_no': rerano,
-        "ni_project_address": address,
+        "ni_project_address": address, 
         "ni_project_lat": lat,
         "ni_project_long": long,
         "site_manger_name": name,

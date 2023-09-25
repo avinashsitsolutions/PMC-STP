@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderTankerSociety extends StatefulWidget {
   const OrderTankerSociety({
@@ -30,6 +31,14 @@ class _OrderTankerSocietyState extends State<OrderTankerSociety> {
   double cost = 0;
   double baseRate = 0;
   double ratePerkm = 0;
+  String getGoogleMapsUrl(
+      double originLat, double originLng, double destLat, double destLng) {
+    final apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    final url =
+        'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&key=$apiKey';
+    return url;
+  }
+
   // ignore: prefer_typing_uninitialized_variables
   var lat1;
   var watercharges = "0";
@@ -537,13 +546,22 @@ class _OrderTankerSocietyState extends State<OrderTankerSociety> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Mapline(
-                              endlocation: coordinate2,
-                              startlocation: coordinate1,
-                            )));
+                String googleMapsUrl = getGoogleMapsUrl(
+                  coordinate2.latitude,
+                  coordinate2.longitude,
+                  coordinate1.latitude,
+                  coordinate1.longitude,
+                );
+
+                // ignore: deprecated_member_use
+                launch(googleMapsUrl);
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => Mapline(
+                //               endlocation: coordinate2,
+                //               startlocation: coordinate1,
+                //             )));
               },
               icon: const Icon(Icons.arrow_forward),
               label: const Text('Check distance on Map'),
@@ -554,11 +572,10 @@ class _OrderTankerSocietyState extends State<OrderTankerSociety> {
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
+            image: AssetImage('assets/bottomimage.png'),
           ),
         ),
-        height: 70, // Adjust the height of the image
+        height: 70,
       ),
     );
   }

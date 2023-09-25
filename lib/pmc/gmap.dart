@@ -28,13 +28,15 @@ class _MaplineState extends State<Mapline> {
         google_api_key,
         PointLatLng(
             widget.startlocation.latitude, widget.startlocation.longitude),
-        PointLatLng(widget.endlocation.latitude, widget.endlocation.longitude));
+        PointLatLng(widget.endlocation.latitude, widget.endlocation.longitude),
+        travelMode: TravelMode.driving);
     if (result.points.isNotEmpty) {
       for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       }
       setState(() {});
     }
+    print(polylineCoordinates);
   }
 
   MapType _currentMapType = MapType.normal;
