@@ -37,10 +37,9 @@ class _MapRouteState extends State<MapRoute> {
         }
         setState(() {});
       } else {
-        print("No polyline points found.");
       }
+    // ignore: empty_catches
     } catch (e) {
-      print("Error fetching polyline points: $e");
     }
   }
 
@@ -48,7 +47,6 @@ class _MapRouteState extends State<MapRoute> {
   @override
   void initState() {
     getPloyPoints();
-    print(polylineCoordinates);
 
     super.initState();
   }

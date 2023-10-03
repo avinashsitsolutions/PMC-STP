@@ -123,13 +123,13 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: Appbarwid(),
       ),
       endDrawer: const DrawerWid(),
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Container(
@@ -141,10 +141,10 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Receipt",
@@ -201,7 +201,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                 List<String> parts = entry.value.split(',');
                                 String name = parts[1].trim();
                                 return name == newValue;
-                              }, orElse: () => MapEntry('', '')).key;
+                              }, orElse: () => const MapEntry('', '')).key;
                             });
                             onchange = true;
                             // Print the selected STP name and ID
@@ -216,7 +216,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                         ),
                       ),
                       // Variable to store the selected value
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Container(
@@ -278,7 +278,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
@@ -299,9 +299,9 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                         )
                       : _dataList.isEmpty
                           // check == "false"
-                          ? Center(
+                          ? const Center(
                               child: Column(
-                                children: const [
+                                children: [
                                   SizedBox(
                                     height: 30,
                                   ),
@@ -319,7 +319,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                             )
                           : ListView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: _dataList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final data = _dataList[index];
@@ -342,7 +342,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                     width: MediaQuery.of(context).size.width,
                                     child: Column(
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Center(
@@ -354,7 +354,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             scale: 0.3,
                                           ),
                                         )),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         QrImageView(
@@ -362,14 +362,14 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                           version: QrVersions.auto,
                                           size: 100.0,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         Column(
                                           children: [
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -377,7 +377,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -403,7 +403,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         "STP/2023/${data['id']}",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -413,7 +413,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -421,7 +421,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -447,7 +447,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         formattedDate,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -457,7 +457,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -465,7 +465,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -492,7 +492,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                       Text(
                                                         data['ni_project_name'] ??
                                                             0,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -502,7 +502,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -510,7 +510,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -536,7 +536,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         "${data['ni_water_capacity'] ?? 0} Liters",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -546,7 +546,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -554,7 +554,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -580,7 +580,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         data['ni_tanker_no'],
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -590,7 +590,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -598,7 +598,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -625,7 +625,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                       Text(
                                                         data['ni_tanker_mo_no']
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -635,7 +635,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -643,7 +643,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -669,7 +669,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         "${data['ni_distance'] ?? 0} KM",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -679,7 +679,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -687,7 +687,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -713,7 +713,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     children: [
                                                       Text(
                                                         "₹${data['ni_estimated_amount'] ?? 0}",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -723,7 +723,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -731,7 +731,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -758,7 +758,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                       Text(
                                                         data['ni_nearest_stp'] ??
                                                             0,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -768,7 +768,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                             ),
                                             Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 150,
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -776,7 +776,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: const [
+                                                    children: [
                                                       Padding(
                                                         padding: EdgeInsets.all(
                                                             10.0),
@@ -804,7 +804,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                         data['status'] == false
                                                             ? "Pending"
                                                             : "Completed",
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 17),
                                                       ),
                                                     ],
@@ -812,10 +812,10 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                                 )
                                               ],
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 20,
                                             ),
-                                            Divider(
+                                            const Divider(
                                               height: 1,
                                               color: Colors.black,
                                               indent: 120,

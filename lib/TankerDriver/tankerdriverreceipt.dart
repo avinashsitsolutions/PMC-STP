@@ -13,13 +13,11 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/TankerDriver/map_route.dart';
 import 'package:tankerpcmc/widgets/appbar.dart';
 import 'package:tankerpcmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ImageSaveResult {
   final bool isSuccess;
@@ -80,7 +78,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
 
   String getGoogleMapsUrl(
       double originLat, double originLng, double destLat, double destLng) {
-    final apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    const apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
     final url =
         'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&key=$apiKey';
     return url;
@@ -330,7 +328,6 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                               itemCount: _dataList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final data = _dataList[index];
-                                print(data.toString());
                                 String dateString = data['created_at'];
                                 final projectLat = double.tryParse(
                                         data["ni_project_lat"] ??
@@ -947,7 +944,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                                 // );
                                               },
                                               child: Row(
-                                                children: [
+                                                children: const [
                                                   Text("Route"),
                                                   Icon(Icons.location_on)
                                                 ],

@@ -6,7 +6,7 @@ class BuilderRegistration extends StatefulWidget {
 
   @override
   State<BuilderRegistration> createState() => _BuilderRegistrationState();
-} 
+}
 
 class _BuilderRegistrationState extends State<BuilderRegistration> {
   final _formKey = GlobalKey<FormState>();

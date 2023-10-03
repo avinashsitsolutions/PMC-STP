@@ -49,7 +49,7 @@ class _TankerListState extends State<TankerList> {
 
   Future<void> bookTanker(int index) async {
     if (_isBookingInProgress) {
-      return; // Booking already in progress, do nothing
+      return; 
     }
 
     setState(() {

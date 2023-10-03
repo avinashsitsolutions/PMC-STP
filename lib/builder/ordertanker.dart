@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/TankerDriver/map_route.dart';
 import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/pmc/gmap.dart';
 import 'package:tankerpcmc/builder/list.dart';
 import 'package:tankerpcmc/widgets/appbar.dart';
 import 'package:tankerpcmc/widgets/drawerwidget.dart';
@@ -74,13 +72,9 @@ class _OrderTankerState extends State<OrderTanker> {
   // }
   calculateRoadDistance(double originLat, double originLng, double destLat,
       double destLng) async {
-    String url = "https://maps.googleapis.com/maps/api/directions/json" +
-        "?origin=$originLat,$originLng" +
-        "&destination=$destLat,$destLng" +
-        "&key=AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE";
+    String url = "https://maps.googleapis.com/maps/api/directions/json?origin=$originLat,$originLng&destination=$destLat,$destLng&key=AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE";
 
     final response = await http.get(Uri.parse(url));
-    print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       if (data['status'] == 'OK') {
@@ -98,7 +92,7 @@ class _OrderTankerState extends State<OrderTanker> {
 
   String getGoogleMapsUrl(
       double originLat, double originLng, double destLat, double destLng) {
-    final apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
+    const apiKey = 'AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE';
     final url =
         'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=$destLat,$destLng&key=$apiKey';
     return url;
@@ -635,7 +629,6 @@ class _OrderTankerState extends State<OrderTanker> {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                print(coordinate2.latitude);
                 String googleMapsUrl = getGoogleMapsUrl(
                   coordinate2.latitude,
                   coordinate2.longitude,

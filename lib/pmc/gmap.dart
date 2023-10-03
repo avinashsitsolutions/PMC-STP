@@ -36,7 +36,6 @@ class _MaplineState extends State<Mapline> {
       }
       setState(() {});
     }
-    print(polylineCoordinates);
   }
 
   MapType _currentMapType = MapType.normal;
