@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class Services {
   static AddProjectPCMC(
@@ -15,7 +16,7 @@ class Services {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("PCMC_user_id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Add_PCMC_project'),
+      Uri.parse('${Config.baseUrl}/Add_PCMC_project'),
       body: {
         "department_name": dept,
         "ni_project_name": projectname,
@@ -38,8 +39,7 @@ class Services {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("PCMC_user_id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/getPCMCprojectReport'),
+      Uri.parse('${Config.baseUrl}/getPCMCprojectReport'),
       body: {
         "userId": id.toString(),
         "from_date": date1.toString(),

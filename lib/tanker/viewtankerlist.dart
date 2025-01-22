@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/tanker/tankerservices.dart';
-import 'package:tankerpcmc/tanker/updatetanker.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/tanker/tankerservices.dart';
+import 'package:tankerpmc/tanker/updatetanker.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
 import '../widgets/drawerWidget.dart';
 
@@ -143,15 +143,15 @@ class _ViewTankerState extends State<ViewTanker> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

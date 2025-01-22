@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/builder/addBCP.dart';
-import 'package:tankerpcmc/builder/builderreport.dart';
-import 'package:tankerpcmc/builder/veiwproject.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/builder/addBCP.dart';
+import 'package:tankerpmc/builder/builderreport.dart';
+import 'package:tankerpmc/builder/veiwproject.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardBuilder extends StatefulWidget {
@@ -64,7 +64,7 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -75,13 +75,13 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -132,7 +132,7 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.green[50],
+                            color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
                           ),
                           height: 140,
@@ -179,7 +179,7 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.green[50],
+                            color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
                           ),
                           height: 140,
@@ -221,7 +221,7 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.green[50],
+                            color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
                           ),
                           height: 140,
@@ -255,15 +255,15 @@ class _DashboardBuilderState extends State<DashboardBuilder> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                  'assets/bottomimage.png'), // Replace with your image path
-            ),
-          ),
-          height: 70, // Adjust the height of the image
-        ),
+        // bottomNavigationBar: Container(
+        //   decoration: const BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage(
+        //           'assets/bottomimage.png'), // Replace with your image path
+        //     ),
+        //   ),
+        //   height: 70, // Adjust the height of the image
+        // ),
       ),
     );
   }

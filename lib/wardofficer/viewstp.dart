@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/stp/stpservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/stp/stpservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
 import '../widgets/drawerWidget.dart';
 

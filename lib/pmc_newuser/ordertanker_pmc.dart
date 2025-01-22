@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/pmc/gmap.dart';
-import 'package:tankerpcmc/pmc_newuser/tankerlist.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/pmc/gmap.dart';
+import 'package:tankerpmc/pmc_newuser/tankerlist.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 
-class OrderTankerPCMC extends StatefulWidget {
-  const OrderTankerPCMC({
+class Ordertankerpmc extends StatefulWidget {
+  const Ordertankerpmc({
     super.key,
   });
   @override
-  State<OrderTankerPCMC> createState() => _OrderTankerPCMCState();
+  State<Ordertankerpmc> createState() => _OrdertankerpmcState();
 }
 
-class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
+class _OrdertankerpmcState extends State<Ordertankerpmc> {
   LatLng? start;
   LatLng? end;
   String? Projectname;
@@ -49,8 +50,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
     var token = prefss.getString("token");
     var id = prefss.getString("PCMC_user_id");
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/project_name?userId=$id'),
+      Uri.parse('${Config.baseUrl}/project_name?userId=$id'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -73,7 +73,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_capacity'),
+      Uri.parse('${Config.baseUrl}/water_capacity'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -91,8 +91,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
 
   static stplatlong(String stpname) async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_location?ni_stp_name=$stpname'),
+      Uri.parse('${Config.baseUrl}/stp_location?ni_stp_name=$stpname'),
     );
 
     var data = json.decode(response.body);
@@ -105,7 +104,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
   //   final prefss = await SharedPreferences.getInstance();
   //   var id = prefss.getString("manager_id");
   //   final response = await http.get(
-  //     Uri.parse('https://pcmcstp.stockcare.co.in/public/api/site_project_name?id=$id'),
+  //     Uri.parse('${Config.baseUrl}/site_project_name?id=$id'),
   //   );
 
   //   var data = json.decode(response.body);
@@ -122,7 +121,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
   static Projlatlong(String projectname) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/project_location?ni_project_name=$projectname'),
+          '${Config.baseUrl}/project_location?ni_project_name=$projectname'),
     );
 
     var data = json.decode(response.body);
@@ -131,8 +130,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
 
   Future Projectkm(String projectname) async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_distance?ni_project_name=$projectname'),
+      Uri.parse('${Config.baseUrl}/stp_distance?ni_project_name=$projectname'),
     );
 
     var data = json.decode(response.body);
@@ -198,7 +196,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 height: 400,
                 width: 380,
@@ -271,7 +269,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
                                 dropdownColor: Colors.white,
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
-                                  color: Colors.green,
+                                  color: Colors.blue,
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -369,7 +367,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
                               dropdownColor: Colors.white,
                               icon: const Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.green,
+                                color: Colors.blue,
                               ),
                               onChanged: (newVal) {
                                 setState(() {
@@ -496,7 +494,7 @@ class _OrderTankerPCMCState extends State<OrderTankerPCMC> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),

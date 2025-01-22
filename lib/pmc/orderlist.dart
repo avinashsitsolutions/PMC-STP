@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 import 'dart:convert';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class OrderList extends StatefulWidget {
   const OrderList({super.key});
@@ -30,8 +31,7 @@ class _OrderListState extends State<OrderList> {
 
   Future getcount() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/total_Order_new_count'),
+      Uri.parse('${Config.baseUrl}/total_Order_new_count'),
     );
     var data = json.decode(response.body);
     setState(() {
@@ -222,7 +222,7 @@ class _OrderListState extends State<OrderList> {
         //     //       decoration: const BoxDecoration(
         //     //         border: Border(
         //     //           bottom: BorderSide(
-        //     //             color: Colors.green,
+        //     //             color: Colors.blue,
         //     //             width: 1.0,
         //     //           ),
         //     //         ),
@@ -232,7 +232,7 @@ class _OrderListState extends State<OrderList> {
         //     //         value: dropdownValue,
         //     //         menuMaxHeight: 200,
         //     //         decoration: const InputDecoration(
-        //     //           suffixIconColor: Colors.green,
+        //     //           suffixIconColor: Colors.blue,
         //     //           hintText: 'Select Status',
         //     //           border: InputBorder.none,
         //     //           enabledBorder: UnderlineInputBorder(
@@ -255,7 +255,7 @@ class _OrderListState extends State<OrderList> {
         //     //         },
         //     //         icon: const Icon(
         //     //           Icons.arrow_drop_down,
-        //     //           color: Colors.green,
+        //     //           color: Colors.blue,
         //     //         ),
         //     //         onChanged: (newValue) {
         //     //           setState(() {

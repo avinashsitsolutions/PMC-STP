@@ -18,7 +18,7 @@ class _DashcountState extends State<Dashcount> {
           child: Container(
             height: 150,
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Column(
@@ -50,7 +50,7 @@ class _DashcountState extends State<Dashcount> {
           child: Container(
             height: 100,
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Column(

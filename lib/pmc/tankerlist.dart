@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 import 'dart:convert';
 
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class TankerList extends StatefulWidget {
   const TankerList({super.key});
@@ -20,8 +21,7 @@ class _TankerListState extends State<TankerList> {
 
   Future getAllorder() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/show_registered_tanker_new'),
+      Uri.parse('${Config.baseUrl}/show_registered_tanker_new'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {

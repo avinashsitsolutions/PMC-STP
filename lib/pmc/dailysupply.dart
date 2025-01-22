@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:http/http.dart' as http;
 
 class DailySupply extends StatefulWidget {
@@ -23,8 +24,7 @@ class _DailySupplyState extends State<DailySupply> {
   bool isLoading = true; // initialize loading state to true
   Future<void> getdata() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/Today_supplay_in_litters'),
+      Uri.parse('${Config.baseUrl}/Today_supplay_in_litters'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {

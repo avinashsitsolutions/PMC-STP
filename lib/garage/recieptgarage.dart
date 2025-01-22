@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class ReceiptGarage extends StatefulWidget {
   const ReceiptGarage({super.key});
@@ -27,8 +28,7 @@ class _ReceiptGarageState extends State<ReceiptGarage> {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/garage_recipt_completed?user_id=$id'),
+      Uri.parse('${Config.baseUrl}/garage_recipt_completed?user_id=$id'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {
@@ -53,8 +53,7 @@ class _ReceiptGarageState extends State<ReceiptGarage> {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/garage_recipt_pending?user_id=$id'),
+      Uri.parse('${Config.baseUrl}/garage_recipt_pending?user_id=$id'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {
@@ -94,7 +93,7 @@ class _ReceiptGarageState extends State<ReceiptGarage> {
           padding: const EdgeInsets.all(15.0),
           child: Container(
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -197,7 +196,7 @@ class _ReceiptGarageState extends State<ReceiptGarage> {
                                           width: 50,
                                           height: 50,
                                           child: Image.asset(
-                                            'assets/pcmc_logo.jpg',
+                                            'assets/pcmc_logo.png',
                                             scale: 0.3,
                                           ),
                                         )),

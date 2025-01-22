@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class ViewDetails extends StatefulWidget {
   const ViewDetails({super.key});
@@ -72,15 +72,15 @@ class _ViewDetailsState extends State<ViewDetails> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

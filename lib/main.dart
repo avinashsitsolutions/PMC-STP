@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
-import 'package:tankerpcmc/Auth/splashscreen.dart';
+import 'package:tankerpmc/Auth/splashscreen.dart';
 
 AndroidMapRenderer mapRenderer = AndroidMapRenderer.platformDefault;
 
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'PCMC Recycle Water System',
+      title: 'PMC STP Water Tanker System',
       theme: ThemeData(
         primarySwatch:
-            createMaterialColor(const Color.fromARGB(255, 186, 226, 171)),
+            createMaterialColor(const Color.fromARGB(255, 63, 81, 181)),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.red,
         ),

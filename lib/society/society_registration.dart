@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/Auth/login.dart';
+import 'package:tankerpmc/Auth/login.dart';
 
 class SocietyRegistration extends StatefulWidget {
   const SocietyRegistration({super.key});
@@ -22,7 +22,7 @@ class _SocietyRegistrationState extends State<SocietyRegistration> {
           child: Row(
             children: [
               Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 // width: 20,
                 height: 100,
               ),
@@ -65,7 +65,7 @@ class _SocietyRegistrationState extends State<SocietyRegistration> {
                     topRight: Radius.circular(50.0),
                     bottomLeft: Radius.circular(50.0),
                   ),
-                  color: Colors.green,
+                  color: Colors.blue,
                 ),
                 height: 550,
                 width: 380,
@@ -355,7 +355,7 @@ class _SocietyRegistrationState extends State<SocietyRegistration> {
                                         Colors.white),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 shape:
                                     MaterialStateProperty.all<OutlinedBorder>(
                                   const RoundedRectangleBorder(

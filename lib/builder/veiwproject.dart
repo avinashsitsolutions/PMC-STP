@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/builder/updatebcp.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/builder/updatebcp.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
 import '../widgets/drawerWidget.dart';
 
@@ -27,8 +27,8 @@ class _ViewProjectState extends State<ViewProject> {
 
           // Update the 'water_type_id' field for all items in bcpList
           bcpList = data.map<Map<String, dynamic>>((item) {
-            // Parse the string into a list of integers
-            String waterTypeIdString = item['water_type_id'] as String;
+            String waterTypeIdString = item['water_type_id'] as String? ??
+                ''; // Handle null with default value
             waterTypeIdString = waterTypeIdString
                 .replaceAll('[', '')
                 .replaceAll(']', '')
@@ -37,13 +37,6 @@ class _ViewProjectState extends State<ViewProject> {
                 .split(',')
                 .map<int>((str) => int.tryParse(str.trim()) ?? 0)
                 .toList();
-            // List<int> waterTypeIdList = (item['water_type_id'] as String)
-            //     .replaceAll('[', '')
-            //     .replaceAll(']', '')
-            //     .replaceAll('"', '')
-            //     .split(',')
-            //     .map<int>((str) => int.parse(str.trim()))
-            //     .toList();
 
             return {
               ...item,
@@ -88,6 +81,8 @@ class _ViewProjectState extends State<ViewProject> {
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           final bcpItem = bcpList[index];
+
+                          // Directly using ?? for default values if any value is null
                           final projectName = bcpItem['ni_project_name'] ?? '';
                           final bcpNo = bcpItem['ni_bcp_no'] ?? '';
                           final mobile = bcpItem['ni_site_man_mo_no'] ?? '';
@@ -95,16 +90,17 @@ class _ViewProjectState extends State<ViewProject> {
                           final lat = bcpItem['ni_project_lat'] ?? '';
                           final long = bcpItem['ni_project_long'] ?? '';
                           final managername = bcpItem['site_manger_name'] ?? '';
-                          final rerano = bcpItem['ni_rera_no'] ?? '';
-                          final projecttype = bcpItem['project_type'] ?? ' ';
-                          final tankertype = (bcpItem['tanker_type'] != null &&
-                                  bcpItem['tanker_type'].isNotEmpty)
-                              ? bcpItem['tanker_type']
-                              : 'Select Tanker Type';
-                          final tankerid = (bcpItem['water_type_id']);
+                          final rerano = bcpItem['ni_rera_no'] ??
+                              ''; // Using ?? to handle null
+                          final projecttype =
+                              bcpItem['project_type'] ?? ' '; // Default if null
+                          final tankertype = bcpItem['tanker_type'] ??
+                              'Select Tanker Type'; // Default if null
+                          final tankerid = bcpItem['water_type_id'] ?? [];
+
                           return Card(
                             child: ListTile(
-                              subtitle: Text("Commecement No: $bcpNo"),
+                              subtitle: Text("BCP No: $bcpNo"),
                               title: Text("Project Name: $projectName"),
                               trailing: IconButton(
                                   onPressed: () {
@@ -136,15 +132,15 @@ class _ViewProjectState extends State<ViewProject> {
                     ),
         ],
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

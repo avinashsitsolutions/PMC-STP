@@ -1,8 +1,9 @@
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/stp/stpservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/stp/stpservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -27,7 +28,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
     _isLoading = true;
 
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/getstprecipt'),
+      Uri.parse('${Config.baseUrl}/getstprecipt'),
       body: {
         "id": id.toString(),
       },
@@ -54,8 +55,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
 
     // print(token);
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/getstprecipt_pending'),
+      Uri.parse('${Config.baseUrl}/getstprecipt_pending'),
       body: {
         "id": id.toString(),
       },
@@ -135,7 +135,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
           child: Container(
               // height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -158,7 +158,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                         decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: Colors.green,
+                              color: Colors.blue,
                               width: 1.0,
                             ),
                           ),
@@ -168,7 +168,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                           value: dropdownValue,
                           menuMaxHeight: 200,
                           decoration: const InputDecoration(
-                            suffixIconColor: Colors.green,
+                            suffixIconColor: Colors.blue,
                             hintText: 'Select an STP',
                             border: InputBorder.none,
                             enabledBorder: UnderlineInputBorder(
@@ -191,7 +191,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                           },
                           icon: const Icon(
                             Icons.arrow_drop_down,
-                            color: Colors.green,
+                            color: Colors.blue,
                           ),
                           onChanged: (newValue) {
                             setState(() {
@@ -223,7 +223,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                         decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: Colors.green,
+                              color: Colors.blue,
                               width: 1.0,
                             ),
                           ),
@@ -233,7 +233,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                           value: dropdownValue1,
                           menuMaxHeight: 200,
                           decoration: const InputDecoration(
-                            suffixIconColor: Colors.green,
+                            suffixIconColor: Colors.blue,
                             hintText: 'Select an option',
                             border: InputBorder.none,
                             enabledBorder: UnderlineInputBorder(
@@ -256,7 +256,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                           },
                           icon: const Icon(
                             Icons.arrow_drop_down,
-                            color: Colors.green,
+                            color: Colors.blue,
                           ),
                           onChanged: (newValue) {
                             setState(() {
@@ -350,7 +350,7 @@ class _ReceiptWardoffState extends State<ReceiptWardoff> {
                                           width: 50,
                                           height: 50,
                                           child: Image.asset(
-                                            'assets/pcmc_logo.jpg',
+                                            'assets/pcmc_logo.png',
                                             scale: 0.3,
                                           ),
                                         )),

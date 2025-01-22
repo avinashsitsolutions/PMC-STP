@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class Builderservices {
   // ignore: non_constant_identifier_names
@@ -10,12 +11,12 @@ class Builderservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("manager_id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/update_project'),
+      Uri.parse('${Config.baseUrl}/update_project'),
       body: {
         "id": id,
         "ni_project_name": projectname,
         'ni_rera_no': rerano,
-        "ni_project_address": address, 
+        "ni_project_address": address,
         "ni_project_lat": lat,
         "ni_project_long": long,
         "site_manger_name": name,
@@ -42,7 +43,7 @@ class Builderservices {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Add_BCP_latest'),
+      Uri.parse('${Config.baseUrl}/Add_BCP_latest'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -89,7 +90,7 @@ class Builderservices {
     var token = prefss.getString("token");
 
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/update_bcp_new'),
+      Uri.parse('${Config.baseUrl}/update_bcp_new'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -119,8 +120,7 @@ class Builderservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("manager_id");
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/site_project_details?id=$id'),
+      Uri.parse('${Config.baseUrl}/site_project_details?id=$id'),
     );
     var data = jsonDecode(response.body);
     // print(jsonDecode(response.body));
@@ -129,7 +129,7 @@ class Builderservices {
 
   static watercharges() async {
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/order_price_show'),
+      Uri.parse('${Config.baseUrl}/order_price_show'),
     );
     var data = jsonDecode(response.body);
     // print(jsonDecode(response.body));
@@ -140,19 +140,20 @@ class Builderservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/view_bcp_no_new'),
+      Uri.parse('${Config.baseUrl}/view_bcp_no_new'),
       body: {
         "userId": id.toString(),
       },
     );
 
     var data = jsonDecode(response.body);
+    print(data);
     return data;
   }
 
   static builderrrport(String id, String fromdate, String todate) async {
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/getBuilderReport'),
+      Uri.parse('${Config.baseUrl}/getBuilderReport'),
       body: {"userId": id.toString(), "from_date": fromdate, "to_date": todate},
     );
 
@@ -165,8 +166,7 @@ class Builderservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/getBuilderReportall'),
+      Uri.parse('${Config.baseUrl}/getBuilderReportall'),
       body: {"userId": id.toString(), "from_date": fromdate, "to_date": todate},
     );
 
@@ -191,7 +191,7 @@ class Builderservices {
     var projectid = prefss.getString("manager_id");
     var builderid = prefss.getString("builder_id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/project_orderss'),
+      Uri.parse('${Config.baseUrl}/project_orderss'),
       body: {
         "ni_project_name": projectname,
         "ni_water_capacity": capacity,
@@ -226,11 +226,10 @@ class Builderservices {
       String tmob,
       String id) async {
     final prefss = await SharedPreferences.getInstance();
-    var builderid = prefss.getString("PCMC_user_id");
+    var builderid = prefss.getString("PMC_user_id");
 
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/project_orders_pmc'),
+      Uri.parse('${Config.baseUrl}/project_orders_pmc'),
       body: {
         "ni_project_name": projectname,
         "ni_water_capacity": capacity,
@@ -257,7 +256,7 @@ class Builderservices {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/orders'),
+      Uri.parse('${Config.baseUrl}/orders'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -282,7 +281,7 @@ class Builderservices {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/orders'),
+      Uri.parse('${Config.baseUrl}/orders'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -352,8 +351,7 @@ class Builderservices {
     String capacity,
   ) async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/water_amount_show?water_qty=$capacity'),
+      Uri.parse('${Config.baseUrl}/water_amount_show?water_qty=$capacity'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -367,7 +365,7 @@ class Builderservices {
     var id = prefss.getString("manager_id");
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_infoo_new?id=$id&ni_tanker_capacity=$capacity&ni_nearest_stp=$stp&ni_user_type=Tanker'),
+          '${Config.baseUrl}/tanker_infoo_new?id=$id&ni_tanker_capacity=$capacity&ni_nearest_stp=$stp&ni_user_type=Tanker'),
     );
     var data = jsonDecode(response.body);
     return data;

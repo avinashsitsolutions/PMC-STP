@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:tankerpcmc/wardofficer/viewstp.dart';
-import 'package:tankerpcmc/wardofficer/wardoffreceipts.dart';
-import 'package:tankerpcmc/wardofficer/warsofficerreport.dart';
+import 'package:tankerpmc/wardofficer/viewstp.dart';
+import 'package:tankerpmc/wardofficer/wardoffreceipts.dart';
+import 'package:tankerpmc/wardofficer/warsofficerreport.dart';
 
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardWardOfficer extends StatefulWidget {
@@ -66,7 +66,7 @@ class _DashboardWardOfficerState extends State<DashboardWardOfficer> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -80,7 +80,7 @@ class _DashboardWardOfficerState extends State<DashboardWardOfficer> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -131,7 +131,7 @@ class _DashboardWardOfficerState extends State<DashboardWardOfficer> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.green[50],
+                            color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
                           ),
                           height: 140,
@@ -175,7 +175,7 @@ class _DashboardWardOfficerState extends State<DashboardWardOfficer> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.green[50],
+                            color: Colors.blue[50],
                             borderRadius: BorderRadius.circular(15),
                           ),
                           height: 140,
@@ -221,7 +221,7 @@ class _DashboardWardOfficerState extends State<DashboardWardOfficer> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.green[50],
+                          color: Colors.blue[50],
                           borderRadius: BorderRadius.circular(15),
                         ),
                         height: 140,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/stp/qrscanner.dart';
-import 'package:tankerpcmc/stp/stpservices.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/stp/qrscanner.dart';
+import 'package:tankerpmc/stp/stpservices.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
@@ -37,7 +37,7 @@ class _ReportStpState extends State<ReportStp> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 40,
               ),
             ),
@@ -45,13 +45,13 @@ class _ReportStpState extends State<ReportStp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Pimpri-Chinchwad Municipal Corporation",
+                  "Pune Municipal Corporation",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 10),
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 9),
                 ),
@@ -96,7 +96,7 @@ class _ReportStpState extends State<ReportStp> {
               const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 60),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             width: MediaQuery.of(context).size.width,
@@ -637,15 +637,15 @@ class _ReportStpState extends State<ReportStp> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class Tankerservices {
   AddVehicle(
@@ -18,7 +19,7 @@ class Tankerservices {
     var name = prefss.getString("ownername");
     var ownermonileno = prefss.getString("Tankerownermobile");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Add_tanker_new'),
+      Uri.parse('${Config.baseUrl}/Add_tanker_new'),
       body: {
         'ni_owner_ful_name': name,
         'tanker_id': id,
@@ -35,7 +36,7 @@ class Tankerservices {
         "tanker_driver_mo_no": drivermobile,
       },
     );
-    var data = jsonDecode(response.body); 
+    var data = jsonDecode(response.body);
     return data;
   }
 
@@ -43,7 +44,7 @@ class Tankerservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/view_tanker'),
+      Uri.parse('${Config.baseUrl}/view_tanker'),
       body: {
         "id": id.toString(),
       },
@@ -61,7 +62,7 @@ class Tankerservices {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Allocate_tanker'),
+      Uri.parse('${Config.baseUrl}/Allocate_tanker'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -85,7 +86,7 @@ class Tankerservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/getTankerReport'),
+      Uri.parse('${Config.baseUrl}/getTankerReport'),
       body: {
         "id": id,
         "ni_tanker_no": tankerno,
@@ -105,8 +106,7 @@ class Tankerservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/getTankerReportall'),
+      Uri.parse('${Config.baseUrl}/getTankerReportall'),
       body: {
         "id": id,
         "from_date": date1.toString(),
@@ -127,7 +127,7 @@ class Tankerservices {
     var token = prefss.getString("token");
 
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/tanker_report'),
+      Uri.parse('${Config.baseUrl}/tanker_report'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -154,7 +154,7 @@ class Tankerservices {
     String stp,
   ) async {
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/updateTanker'),
+      Uri.parse('${Config.baseUrl}/updateTanker'),
       body: {
         "tanker_id": id,
         "builder_id": jsonEncode(builderIds),

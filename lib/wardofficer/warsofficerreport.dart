@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/stp/stpservices.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/stp/stpservices.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
@@ -81,7 +81,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -95,7 +95,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -128,7 +128,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                     top: 20, left: 10, right: 10, bottom: 60),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   width: MediaQuery.of(context).size.width,
@@ -256,7 +256,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                                 decoration: const BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
-                                      color: Colors.green,
+                                      color: Colors.blue,
                                       width: 1.0,
                                     ),
                                   ),
@@ -266,7 +266,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                                   value: dropdownValue,
                                   menuMaxHeight: 200,
                                   decoration: const InputDecoration(
-                                    suffixIconColor: Colors.green,
+                                    suffixIconColor: Colors.blue,
                                     hintText: 'Select an STP',
                                     border: InputBorder.none,
                                     enabledBorder: UnderlineInputBorder(
@@ -289,7 +289,7 @@ class _ReportWardOfficerState extends State<ReportWardOfficer> {
                                   },
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
-                                    color: Colors.green,
+                                    color: Colors.blue,
                                   ),
                                   onChanged: (newValue) {
                                     setState(() {

@@ -11,8 +11,9 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
@@ -47,8 +48,7 @@ class _NewOrderState extends State<NewOrder> {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_owner_orders_recipt_completed'),
+      Uri.parse('${Config.baseUrl}/tanker_owner_orders_recipt_completed'),
       body: {
         "id": id.toString(),
       },
@@ -81,8 +81,7 @@ class _NewOrderState extends State<NewOrder> {
     var id = prefss.getString("id");
     print(id);
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_owner_orders_recipt_new'),
+      Uri.parse('${Config.baseUrl}/tanker_owner_orders_recipt_new'),
       body: {
         "id": id.toString(),
       },
@@ -275,7 +274,7 @@ class _NewOrderState extends State<NewOrder> {
           child: Container(
               // height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -363,7 +362,7 @@ class _NewOrderState extends State<NewOrder> {
                                             width: 50,
                                             height: 50,
                                             child: Image.asset(
-                                              'assets/pcmc_logo.jpg',
+                                              'assets/pcmc_logo.png',
                                               scale: 0.3,
                                             ),
                                           )),
@@ -857,15 +856,15 @@ class _NewOrderState extends State<NewOrder> {
               )),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

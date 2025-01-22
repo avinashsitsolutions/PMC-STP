@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/stp/qrscanner.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/stp/qrscanner.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -27,7 +28,7 @@ class _NewOrderStpState extends State<NewOrderStp> {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/show_orders'),
+      Uri.parse('${Config.baseUrl}/show_orders'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -55,8 +56,7 @@ class _NewOrderStpState extends State<NewOrderStp> {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/show_orders_stp_pending'),
+      Uri.parse('${Config.baseUrl}/show_orders_stp_pending'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -100,7 +100,7 @@ class _NewOrderStpState extends State<NewOrderStp> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 40,
               ),
             ),
@@ -108,13 +108,13 @@ class _NewOrderStpState extends State<NewOrderStp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Pimpri-Chinchwad Municipal Corporation",
+                  "Pune Municipal Corporation",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 10),
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 9),
                 ),
@@ -160,7 +160,7 @@ class _NewOrderStpState extends State<NewOrderStp> {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green[50],
+            color: Colors.blue[50],
             borderRadius: BorderRadius.circular(15),
           ),
           width: MediaQuery.of(context).size.width,
@@ -631,15 +631,15 @@ class _NewOrderStpState extends State<NewOrderStp> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

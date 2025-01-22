@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/tanker/dashboard_tanker.dart';
-import 'package:tankerpcmc/tanker/tankerservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/tanker/dashboard_tanker.dart';
+import 'package:tankerpmc/tanker/tankerservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +28,7 @@ class _AddVehicleState extends State<AddVehicle> {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/stp_name'),
+      Uri.parse('${Config.baseUrl}/stp_name'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -58,7 +59,7 @@ class _AddVehicleState extends State<AddVehicle> {
   Future getbuilder() async {
     _isLoading = true;
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/builder_list'),
+      Uri.parse('${Config.baseUrl}/builder_list'),
     );
     var data = json.decode(response.body);
     if (data['error'] == false) {
@@ -79,7 +80,7 @@ class _AddVehicleState extends State<AddVehicle> {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_capacity'),
+      Uri.parse('${Config.baseUrl}/water_capacity'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -144,7 +145,7 @@ class _AddVehicleState extends State<AddVehicle> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -332,7 +333,7 @@ class _AddVehicleState extends State<AddVehicle> {
                             dropdownColor: Colors.white,
                             icon: const Icon(
                               Icons.arrow_drop_down,
-                              color: Colors.green,
+                              color: Color(0xff3e50b5),
                             ),
                             onChanged: (newVal) {
                               setState(() {
@@ -387,8 +388,8 @@ class _AddVehicleState extends State<AddVehicle> {
                             dropdownColor: Colors.white,
                             icon: const Icon(
                               Icons.arrow_drop_down,
-                              color: Colors
-                                  .green, // Set the desired color of the icon
+                              color: Color(
+                                  0xff3e50b5), // Set the desired color of the icon
                             ),
                             onChanged: (newVal) {
                               setState(() {
@@ -420,7 +421,7 @@ class _AddVehicleState extends State<AddVehicle> {
                           decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Colors.green,
+                                color: Color(0xff3e50b5),
                                 width: 1.0,
                               ),
                             ),
@@ -429,7 +430,7 @@ class _AddVehicleState extends State<AddVehicle> {
                             value: dropdownValue2,
                             menuMaxHeight: 200,
                             decoration: const InputDecoration(
-                              suffixIconColor: Colors.green,
+                              suffixIconColor: Color(0xff3e50b5),
                               fillColor: Colors.white,
                               hintText: 'Select an option',
                               border: InputBorder.none,
@@ -448,7 +449,7 @@ class _AddVehicleState extends State<AddVehicle> {
                             ),
                             icon: const Icon(
                               Icons.arrow_drop_down,
-                              color: Colors.green,
+                              color: Color(0xff3e50b5),
                             ),
                             onChanged: (newValue) {
                               setState(() {
@@ -588,7 +589,7 @@ class _AddVehicleState extends State<AddVehicle> {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                                  Color(0xff3e50b5)),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -625,7 +626,7 @@ class _AddVehicleState extends State<AddVehicle> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            backgroundColor: Colors.green,
+                                            backgroundColor: Colors.blue,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text(data['message']),
                                             duration:
@@ -703,15 +704,15 @@ class _AddVehicleState extends State<AddVehicle> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

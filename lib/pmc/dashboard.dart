@@ -2,15 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/pmc/builderlist.dart';
-import 'package:tankerpcmc/pmc/dailysupply.dart';
-import 'package:tankerpcmc/pmc/orderlist.dart';
+import 'package:tankerpmc/pmc/builderlist.dart';
+import 'package:tankerpmc/pmc/dailysupply.dart';
+import 'package:tankerpmc/pmc/orderlist.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/pmc/stplist.dart';
-import 'package:tankerpcmc/pmc/tankerlist.dart';
-import 'package:tankerpcmc/pmc/todayreceipt.dart';
-import 'package:tankerpcmc/widgets/dimensions.dart';
+import 'package:tankerpmc/pmc/stplist.dart';
+import 'package:tankerpmc/pmc/tankerlist.dart';
+import 'package:tankerpmc/pmc/todayreceipt.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/dimensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/drawerWidget.dart';
@@ -63,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
 
   getCounts() async {
     var response = await http.get(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/count_new"),
+      Uri.parse("${Config.baseUrl}/count_new"),
     );
     final Map<String, dynamic> data = jsonDecode(response.body);
     return data;
@@ -125,7 +126,7 @@ class _DashboardState extends State<Dashboard> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -136,13 +137,13 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -239,11 +240,14 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.only(top: 30),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.green[50],
+                              color: Colors.blue[50],
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Column(
                               children: [
+                                const SizedBox(
+                                  height: 40,
+                                ),
                                 CircleAvatar(
                                     radius: 20,
                                     child: Image.asset(

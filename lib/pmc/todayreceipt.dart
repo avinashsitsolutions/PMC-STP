@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/pmc/pmcservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/pmc/pmcservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
 import '../widgets/drawerWidget.dart';
 

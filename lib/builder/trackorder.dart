@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class TrackOrder extends StatefulWidget {
   const TrackOrder({super.key});
@@ -40,7 +40,7 @@ class _TrackOrderState extends State<TrackOrder> {
           children: [
             Center(
               child: Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 // width: 20,
                 height: 130,
               ),
@@ -74,7 +74,7 @@ class _TrackOrderState extends State<TrackOrder> {
               const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 60),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             width: MediaQuery.of(context).size.width,

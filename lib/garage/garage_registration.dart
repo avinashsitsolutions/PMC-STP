@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/Auth/login.dart';
+import 'package:tankerpmc/Auth/login.dart';
 
 class GarageRegistration extends StatefulWidget {
   const GarageRegistration({super.key});
@@ -23,7 +23,7 @@ class _GarageRegistrationState extends State<GarageRegistration> {
           child: Row(
             children: [
               Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 // width: 20,
                 height: 100,
               ),
@@ -68,7 +68,7 @@ class _GarageRegistrationState extends State<GarageRegistration> {
                       topRight: Radius.circular(50.0),
                       bottomLeft: Radius.circular(50.0),
                     ),
-                    color: Colors.green,
+                    color: Colors.blue,
                   ),
                   height: 500,
                   width: 380,
@@ -360,7 +360,7 @@ class _GarageRegistrationState extends State<GarageRegistration> {
                                         Colors.white),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 shape:
                                     MaterialStateProperty.all<OutlinedBorder>(
                                   const RoundedRectangleBorder(

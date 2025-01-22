@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/society/ordertankerSociety.dart';
-import 'package:tankerpcmc/society/receiptsociety.dart';
-import 'package:tankerpcmc/society/societyreport.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/society/ordertankerSociety.dart';
+import 'package:tankerpmc/society/receiptsociety.dart';
+import 'package:tankerpmc/society/societyreport.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardSociety extends StatefulWidget {
@@ -64,7 +64,7 @@ class _DashboardSocietyState extends State<DashboardSociety> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -75,13 +75,13 @@ class _DashboardSocietyState extends State<DashboardSociety> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -127,7 +127,7 @@ class _DashboardSocietyState extends State<DashboardSociety> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,
@@ -166,7 +166,7 @@ class _DashboardSocietyState extends State<DashboardSociety> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,
@@ -205,7 +205,7 @@ class _DashboardSocietyState extends State<DashboardSociety> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,

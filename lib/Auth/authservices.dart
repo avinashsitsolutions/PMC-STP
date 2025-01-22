@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class Authservices {
   static registerUser(
@@ -19,11 +20,11 @@ class Authservices {
     String password,
     String tankermob,
     // ignore: non_constant_identifier_names
-    String PCMCid,
-    String PCMCname,
+    String PMCid,
+    String PMCname,
   ) async {
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/register_new'),
+      Uri.parse('${Config.baseUrl}/register_new'),
       body: {
         'ni_user_type': usertype,
         'ni_first_name': firstname,
@@ -38,8 +39,8 @@ class Authservices {
         'status': status,
         'password': password,
         'ni_tanker_mo_no': tankermob,
-        'employee_id': PCMCid,
-        'ni_employee_name': PCMCname
+        'employee_id': PMCid,
+        'ni_employee_name': PMCname
       },
     );
     var data = jsonDecode(response.body.toString());
@@ -56,7 +57,7 @@ class Authservices {
     var token = prefss.getString("token");
 
     final response = await http.post(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/login_new"),
+      Uri.parse("${Config.baseUrl}/login_new"),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -68,6 +69,7 @@ class Authservices {
         'password': password,
       },
     );
+    // print(response.body);
     var data = jsonDecode(response.body);
     setLoading(false);
     return data;
@@ -77,12 +79,13 @@ class Authservices {
       String id, String password, Function(bool) setLoading) async {
     setLoading(true);
     final response = await http.post(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/PCMC_login"),
+      Uri.parse("${Config.baseUrl}/PMC_login"),
       body: {
         'ni_employee_id': id,
         'password': password,
       },
     );
+    print(response.body);
     var data = jsonDecode(response.body);
     setLoading(false);
     return data;
@@ -92,7 +95,7 @@ class Authservices {
       String id, String password, Function(bool) setLoading) async {
     setLoading(true);
     final response = await http.post(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/PCMC_login"),
+      Uri.parse("${Config.baseUrl}/PMC_login"),
       body: {
         'employee_id': id,
         'password': password,
@@ -110,8 +113,7 @@ class Authservices {
     String newpassword,
   ) async {
     final response = await http.post(
-      Uri.parse(
-          "https://pcmcstp.stockcare.co.in/public/api/updatePassword_tanker_owner"),
+      Uri.parse("${Config.baseUrl}/updatePassword_tanker_owner"),
       body: {
         'tanker_mo_no_or_contact_no': mobno,
         'password': password,
@@ -128,8 +130,7 @@ class Authservices {
     String newpassword,
   ) async {
     final response = await http.post(
-      Uri.parse(
-          "https://pcmcstp.stockcare.co.in/public/api/users/password/tanker"),
+      Uri.parse("${Config.baseUrl}/users/password/tanker"),
       body: {
         'ni_tanker_no': tankerno,
         'password': password,
@@ -147,8 +148,7 @@ class Authservices {
     String newpassword,
   ) async {
     final response = await http.post(
-      Uri.parse(
-          "https://pcmcstp.stockcare.co.in/public/api/updatePassword_bcp"),
+      Uri.parse("${Config.baseUrl}/updatePassword_bcp"),
       body: {
         'ni_bcp_no': tankerno,
         'password': password,
@@ -167,7 +167,7 @@ class Authservices {
     var token = prefss.getString("token");
     // print(token1);
     final response = await http.post(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/stp_login"),
+      Uri.parse("${Config.baseUrl}/stp_login"),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -189,7 +189,7 @@ class Authservices {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.post(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/tanker_login"),
+      Uri.parse("${Config.baseUrl}/tanker_login"),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -208,8 +208,7 @@ class Authservices {
       String bcpno, String password, Function(bool) setLoading) async {
     // print(token);
     final response = await http.post(
-      Uri.parse(
-          "https://pcmcstp.stockcare.co.in/public/api/site_manager_login"),
+      Uri.parse("${Config.baseUrl}/site_manager_login"),
       body: {
         'ni_bcp_no': bcpno,
         'password': password,
@@ -221,7 +220,7 @@ class Authservices {
 
   static update() async {
     final response = await http.get(
-      Uri.parse("https://pcmcstp.stockcare.co.in/public/api/version"),
+      Uri.parse("${Config.baseUrl}/version"),
     );
     var data = jsonDecode(response.body);
     return data;

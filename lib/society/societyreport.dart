@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/society/societyservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/society/societyservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
 class ReportSociety extends StatefulWidget {
@@ -67,7 +67,7 @@ class _ReportSocietyState extends State<ReportSociety> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(children: [
@@ -353,15 +353,15 @@ class _ReportSocietyState extends State<ReportSociety> {
                         )
             ]),
           )),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

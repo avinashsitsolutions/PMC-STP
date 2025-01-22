@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class Stpsservices {
   static reportstp(
@@ -11,7 +12,7 @@ class Stpsservices {
     var id = prefss.getString("stp_id");
     var token = prefss.getString("token");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/stp_report'),
+      Uri.parse('${Config.baseUrl}/stp_report'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -30,8 +31,7 @@ class Stpsservices {
 
   static reportwardoff(String date1, String date2, String id) async {
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/getWardOfficierReport'),
+      Uri.parse('${Config.baseUrl}/getWardOfficierReport'),
       body: {
         "id": id.toString(),
         "from_date": date1.toString(),
@@ -47,7 +47,7 @@ class Stpsservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("wardofficerid");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/getAssignedSTPs'),
+      Uri.parse('${Config.baseUrl}/getAssignedSTPs'),
       // headers: {
       //   'Authorization': 'Bearer $token',
       //   'Accept': 'application/json',

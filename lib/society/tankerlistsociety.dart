@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:tankerpcmc/society/receiptsociety.dart';
-import 'package:tankerpcmc/society/societyservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/society/receiptsociety.dart';
+import 'package:tankerpmc/society/societyservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:http/http.dart' as http;
 // ignore: unused_import
 import 'package:url_launcher/url_launcher.dart';
@@ -75,7 +75,7 @@ class _TankerListSocietyState extends State<TankerListSociety> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
           behavior: SnackBarBehavior.floating,
           content: Text("Order Added Successfully !!"),
           duration: Duration(seconds: 2),
@@ -117,7 +117,7 @@ class _TankerListSocietyState extends State<TankerListSociety> {
         padding: const EdgeInsets.all(15.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green[50],
+            color: Colors.blue[50],
             borderRadius: BorderRadius.circular(15),
           ),
           width: MediaQuery.of(context).size.width,
@@ -250,15 +250,15 @@ class _TankerListSocietyState extends State<TankerListSociety> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

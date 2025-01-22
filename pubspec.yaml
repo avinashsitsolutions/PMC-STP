@@ -1,13 +1,11 @@
-name: tankerpcmc
+name: tankerpmc
 description: A new Flutter project.
-publish_to: 'none'
-
+publish_to: "none"
 
 version: 1.0.4+6
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
-
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   connectivity_plus: ^3.0.3
@@ -57,7 +55,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  
+
   flutter_test:
     sdk: flutter
 flutter_icons:

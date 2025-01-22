@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:multiselect/multiselect.dart';
-import 'package:tankerpcmc/pmc/pmcservices.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/pmc/pmcservices.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OfficerRegistration extends StatefulWidget {
@@ -45,7 +46,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
   Future getstp() async {
     _isLoading = true;
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/stp_name_ward'),
+      Uri.parse('${Config.baseUrl}/stp_name_ward'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {
@@ -128,7 +129,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -139,13 +140,13 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -198,7 +199,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                   ),
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
@@ -407,7 +408,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Color(0xff3d53b1)),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
@@ -436,7 +437,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
-                                          backgroundColor: Colors.green,
+                                          backgroundColor: Color(0xff3d53b1),
                                           behavior: SnackBarBehavior.floating,
                                           content: Text(
                                               "Ward Officer Registered Successfully !!"),

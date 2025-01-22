@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 import 'dart:convert';
 
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class BuilderList extends StatefulWidget {
   const BuilderList({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class _BuilderListState extends State<BuilderList> {
   bool _loading = true; // initialize loading state to true
   Future<void> getAllorder() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/show_registered_builder'),
+      Uri.parse('${Config.baseUrl}/show_registered_builder'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {

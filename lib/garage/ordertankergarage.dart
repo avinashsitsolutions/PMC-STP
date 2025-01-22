@@ -5,14 +5,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/garage/garage_services.dart';
-import 'package:tankerpcmc/garage/tankerlist)garage.dart';
-import 'package:tankerpcmc/pmc/gmap.dart';
-import 'package:tankerpcmc/society/societyservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/garage/garage_services.dart';
+import 'package:tankerpmc/garage/tankerlist)garage.dart';
+import 'package:tankerpmc/pmc/gmap.dart';
+import 'package:tankerpmc/society/societyservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 
 class OrderTankerGarage extends StatefulWidget {
   const OrderTankerGarage({
@@ -50,7 +51,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_capacity'),
+      Uri.parse('${Config.baseUrl}/water_capacity'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -67,8 +68,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
   List<dynamic> categoryItemList1 = [];
   Future getAllstp(String name) async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_distance_garage?ni_name=$name'),
+      Uri.parse('${Config.baseUrl}/stp_distance_garage?ni_name=$name'),
     );
     var jsonData = json.decode(response.body);
     setState(() {
@@ -78,8 +78,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
 
   static stplatlong(String stpname) async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_location?ni_stp_name=$stpname'),
+      Uri.parse('${Config.baseUrl}/stp_location?ni_stp_name=$stpname'),
     );
 
     var data = json.decode(response.body);
@@ -148,7 +147,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 height: 400,
                 width: 380,
@@ -225,7 +224,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
                               dropdownColor: Colors.white,
                               icon: const Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.green,
+                                color: Colors.blue,
                               ),
                               onChanged: (newVal) {
                                 setState(() {
@@ -300,7 +299,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
                               dropdownColor: Colors.white,
                               icon: const Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.green,
+                                color: Colors.blue,
                               ),
                               onChanged: (newVal) {
                                 setState(() {
@@ -419,7 +418,7 @@ class _OrderTankerGarageState extends State<OrderTankerGarage> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),

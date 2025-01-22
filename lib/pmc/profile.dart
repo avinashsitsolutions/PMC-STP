@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,7 +31,7 @@ class _ProfilePCMCState extends State<ProfilePCMC> {
           padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             width: MediaQuery.of(context).size.width,

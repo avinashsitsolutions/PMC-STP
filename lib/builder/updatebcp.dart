@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:multiselect/multiselect.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:get/get.dart';
 
 import '../getx/controller.dart';
@@ -39,6 +40,7 @@ class UpdateBCP extends StatefulWidget {
   final String projecttype;
   final String tankertype;
   final List<dynamic> selectedBuilders;
+
   @override
   State<UpdateBCP> createState() => _UpdateBCPState();
 }
@@ -64,7 +66,7 @@ class _UpdateBCPState extends State<UpdateBCP> {
   }
 
   bool loadingButton = false;
-  final MapType _currentMapType = MapType.normal;
+  MapType _currentMapType = MapType.normal;
   String mb = '0';
 
   final formKey = GlobalKey<FormState>();
@@ -73,28 +75,28 @@ class _UpdateBCPState extends State<UpdateBCP> {
     bool serviceEnabled;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
               'Location services are disabled. Please enable the services')));
       Geolocator.openLocationSettings();
       return false;
     } else {
-      // _getCurrentPosition();
+      return true;
     }
   }
 
   Random random = Random();
   Future getbuilder() async {
-    _isLoading = true;
+    setState(() {
+      _isLoading = true;
+    });
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_type'),
+      Uri.parse('${Config.baseUrl}/water_type'),
     );
     var data = json.decode(response.body);
     if (data['error'] == false) {
       setState(() {
         fruits = data['data'];
-
         _isLoading = false;
       });
     } else {
@@ -107,24 +109,22 @@ class _UpdateBCPState extends State<UpdateBCP> {
   List<dynamic> fruits = [];
   List<dynamic> selectedFruits = [];
   final _formKey = GlobalKey<FormState>();
-  String getStpNameById(int id) {
-    // Assuming 'fruits' is the list containing the STP data
+
+  String? getStpNameById(int id) {
     var stp = fruits.firstWhere((item) => item['id'] == id, orElse: () => null);
     return stp != null ? stp['water_type'] : null;
   }
 
-  int getStpIdByName(String name) {
-    // Assuming 'fruits' is the list containing the STP data
+  int? getStpIdByName(String name) {
     var stp = fruits.firstWhere((item) => item['water_type'] == name,
         orElse: () => null);
     return stp != null ? stp['id'] : null;
   }
 
-  // ignore: prefer_typing_uninitialized_variables
-  var dropdownValue1 = 'PCMC Project';
-  // ignore: prefer_typing_uninitialized_variables
+  var dropdownValue1 = 'PMC Project';
   var dropdownValue2 = "Private";
   List<dynamic> selectedBuilders = [];
+
   @override
   void initState() {
     super.initState();
@@ -137,6 +137,8 @@ class _UpdateBCPState extends State<UpdateBCP> {
     managernameController.text = widget.managername;
     projecttypeController.text = widget.projecttype;
     selectedBuilders = widget.selectedBuilders;
+    dropdownValue1 =
+        widget.projecttype; // Initialize the dropdown with the project type
     getbuilder();
   }
 
@@ -157,7 +159,7 @@ class _UpdateBCPState extends State<UpdateBCP> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -189,8 +191,8 @@ class _UpdateBCPState extends State<UpdateBCP> {
                         const SizedBox(
                           height: 5,
                         ),
-                        widget.projecttype == "PCMC Project" ||
-                                widget.projecttype == "Non-PCMC Project"
+                        widget.projecttype == "PMC Project" ||
+                                widget.projecttype == "Non-PMC Project"
                             ? TextFormField(
                                 controller: projecttypeController,
                                 enabled: false,
@@ -211,24 +213,22 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                 ),
                                 style: const TextStyle(
                                   fontSize: 17.0,
-                                  // fontWeight: FontWeight.bold,
                                 ),
                               )
                             : Container(
                                 decoration: const BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
-                                      color: Colors.green,
+                                      color: Colors.blue,
                                       width: 1.0,
                                     ),
                                   ),
                                 ),
                                 child: DropdownButtonFormField<String>(
                                   value: dropdownValue1,
-
                                   menuMaxHeight: 200,
                                   decoration: const InputDecoration(
-                                    suffixIconColor: Colors.green,
+                                    suffixIconColor: Colors.blue,
                                     fillColor: Colors.white,
                                     border: InputBorder.none,
                                     filled: true,
@@ -252,18 +252,16 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                   },
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
-                                    color: Colors
-                                        .green, // Set the desired color of the icon
+                                    color: Colors.green,
                                   ),
-                                  // dropdownColor: Colors.green,
                                   onChanged: (newValue) {
                                     setState(() {
                                       dropdownValue1 = newValue!;
                                     });
                                   },
                                   items: <String>[
-                                    'PCMC Project',
-                                    'Non-PCMC Project',
+                                    'PMC Project',
+                                    'Non-PMC Project',
                                   ].map<DropdownMenuItem<String>>(
                                       (String value) {
                                     return DropdownMenuItem<String>(
@@ -306,7 +304,6 @@ class _UpdateBCPState extends State<UpdateBCP> {
                           ),
                           style: const TextStyle(
                             fontSize: 17.0,
-                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -349,14 +346,15 @@ class _UpdateBCPState extends State<UpdateBCP> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty || value.length < 11) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 11) {
                               return 'Please enter valid Commecement Number';
                             }
                             return null;
                           },
                           style: const TextStyle(
                             fontSize: 17.0,
-                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -387,14 +385,13 @@ class _UpdateBCPState extends State<UpdateBCP> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty) {
+                            if (value == null || value.isEmpty) {
                               return 'Please enter Password';
                             }
                             return null;
                           },
                           style: const TextStyle(
                             fontSize: 17.0,
-                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -425,14 +422,13 @@ class _UpdateBCPState extends State<UpdateBCP> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty) {
+                            if (value == null || value.isEmpty) {
                               return 'Please enter Name';
                             }
                             return null;
                           },
                           style: const TextStyle(
                             fontSize: 17.0,
-                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -465,41 +461,16 @@ class _UpdateBCPState extends State<UpdateBCP> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty || value.length < 10) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 10) {
                               return 'Please enter Mobile No';
                             }
                             return null;
                           },
                           style: const TextStyle(
                             fontSize: 17.0,
-                            // fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        const Text(
-                          "Existing Available Water Source :",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        DropDownMultiSelect(
-                          options:
-                              fruits.map((item) => item['water_type']).toList(),
-                          selectedValues: selectedBuilders
-                              .map((id) => getStpNameById(id))
-                              .toList(),
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          ),
-                          onChanged: (selectedNames) {
-                            setState(() {
-                              selectedBuilders = selectedNames
-                                  .map((name) => getStpIdByName(name))
-                                  .toList();
-                            });
-                          },
-                          whenEmpty:
-                              'Select your Existing Available Water Source',
                         ),
                         const SizedBox(
                           height: 10,
@@ -543,15 +514,8 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                             BorderSide(color: Colors.white),
                                       ),
                                     ),
-                                    // validator: (value) {
-                                    //   if (value!.isEmpty) {
-                                    //     return 'Please enter Address';
-                                    //   }
-                                    //   return null;
-                                    // },
                                     style: const TextStyle(
                                       fontSize: 17.0,
-                                      // fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   const SizedBox(
@@ -597,15 +561,8 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                                     color: Colors.white),
                                               ),
                                             ),
-                                            // validator: (value) {
-                                            //   if (value!.isEmpty) {
-                                            //     return 'Please Enter Lattitude';
-                                            //   }
-                                            //   return null;
-                                            // },
                                             style: const TextStyle(
                                               fontSize: 18.0,
-                                              // fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
@@ -620,7 +577,7 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                     child: Row(
                                       children: [
                                         const Text(
-                                          "Lattitude:",
+                                          "Longitude:",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.black,
@@ -655,12 +612,6 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                                     color: Colors.white),
                                               ),
                                             ),
-                                            // validator: (value) {
-                                            //   if (value!.isEmpty) {
-                                            //     return 'Please Enter Longitude';
-                                            //   }
-                                            //   return null;
-                                            // },
                                             style: const TextStyle(
                                               fontSize: 18.0,
                                             ),
@@ -679,7 +630,7 @@ class _UpdateBCPState extends State<UpdateBCP> {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                                  Color(0xff3e50b5)),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -716,7 +667,7 @@ class _UpdateBCPState extends State<UpdateBCP> {
                                       const SnackBar(
                                         content: Text(
                                             'Project Updated Successfulyy'),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                       ),
                                     );
 
@@ -778,15 +729,15 @@ class _UpdateBCPState extends State<UpdateBCP> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

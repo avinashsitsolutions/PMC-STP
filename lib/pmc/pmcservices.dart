@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 
 class PCMCservices {
   static addstp(String name, String uname, String address, String contactname,
@@ -8,7 +9,7 @@ class PCMCservices {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/stp_register'),
+      Uri.parse('${Config.baseUrl}/stp_register'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -42,7 +43,7 @@ class PCMCservices {
     // final prefss = await SharedPreferences.getInstance();
 
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_capacity'),
+      Uri.parse('${Config.baseUrl}/water_capacity'),
       body: {
         'ni_water_capacity': cap,
       },
@@ -61,7 +62,7 @@ class PCMCservices {
     List<dynamic> stpIds,
   ) async {
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Add_ward_officier'),
+      Uri.parse('${Config.baseUrl}/Add_ward_officier'),
       body: {
         "ni_employee_id": id,
         "ni_ward_officier_name": name,
@@ -83,7 +84,7 @@ class PCMCservices {
     String email,
   ) async {
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/Add_department'),
+      Uri.parse('${Config.baseUrl}/Add_department'),
       body: {
         "department_name": deptname,
         "incharge_name": name,
@@ -96,7 +97,7 @@ class PCMCservices {
     return data;
   }
 
-// https://pcmcstp.stockcare.co.in/public/api/Add_ward_officier
+// ${Config.baseUrl}/Add_ward_officier
   static builderreport(
     String date1,
     String date2,
@@ -104,7 +105,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generateReportBuilder?from_date=$date1&to_date=$date2&user_type=$type'),
+          '${Config.baseUrl}/generateReportBuilder?from_date=$date1&to_date=$date2&user_type=$type'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -117,7 +118,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generateReportTanker?from_date=$date1&to_date=$date2&user_type=$type'),
+          '${Config.baseUrl}/generateReportTanker?from_date=$date1&to_date=$date2&user_type=$type'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -130,7 +131,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generateReportstp?from_date=$date1&to_date=$date2&user_type=$type'),
+          '${Config.baseUrl}/generateReportstp?from_date=$date1&to_date=$date2&user_type=$type'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -143,7 +144,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generate_Report_Society?from_date=$date1&to_date=$date2&user_type=$type'),
+          '${Config.baseUrl}/generate_Report_Society?from_date=$date1&to_date=$date2&user_type=$type'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -156,7 +157,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generateReport?from_date=$date1&to_date=$date2&user_type=$type'),
+          '${Config.baseUrl}/generateReport?from_date=$date1&to_date=$date2&user_type=$type'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -164,7 +165,7 @@ class PCMCservices {
 
   static todaysrecepits() async {
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/TodaysRecipt'),
+      Uri.parse('${Config.baseUrl}/TodaysRecipt'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -175,7 +176,7 @@ class PCMCservices {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/countr'),
+      Uri.parse('${Config.baseUrl}/countr'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -188,7 +189,7 @@ class PCMCservices {
 
   static excelreport1() async {
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/final_order_excel'),
+      Uri.parse('${Config.baseUrl}/final_order_excel'),
     );
 
     var data = jsonDecode(response.body);
@@ -197,8 +198,7 @@ class PCMCservices {
 
   static excelreport2() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_wise_tan_reg_count_api'),
+      Uri.parse('${Config.baseUrl}/stp_wise_tan_reg_count_api'),
     );
 
     var data = jsonDecode(response.body);
@@ -207,8 +207,7 @@ class PCMCservices {
 
   static excelreport3() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_wise_tan_reg_count_today_api'),
+      Uri.parse('${Config.baseUrl}/stp_wise_tan_reg_count_today_api'),
     );
 
     var data = jsonDecode(response.body);
@@ -217,8 +216,7 @@ class PCMCservices {
 
   static excelreport4() async {
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/generateReportstp_api_new'),
+      Uri.parse('${Config.baseUrl}/generateReportstp_api_new'),
     );
 
     var data = jsonDecode(response.body);
@@ -232,7 +230,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/stp_report_admin?userId=$id&from_date=$date1&to_date=$date2'),
+          '${Config.baseUrl}/stp_report_admin?userId=$id&from_date=$date1&to_date=$date2'),
     );
 
     var data = jsonDecode(response.body);
@@ -246,7 +244,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/Society_Report_admin?from_date=$date1&to_date=$date2&user_id=$id'),
+          '${Config.baseUrl}/Society_Report_admin?from_date=$date1&to_date=$date2&user_id=$id'),
     );
 
     var data = jsonDecode(response.body);
@@ -261,7 +259,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/builder_report_admin?from_date=$date1&to_date=$date2&ni_first_name=$firstname&ni_last_name=$lastname'),
+          '${Config.baseUrl}/builder_report_admin?from_date=$date1&to_date=$date2&ni_first_name=$firstname&ni_last_name=$lastname'),
     );
 
     var data = jsonDecode(response.body);
@@ -275,7 +273,7 @@ class PCMCservices {
   ) async {
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_report_admin?from_date=$date1&to_date=$date2&ni_tanker_no=$tankerno'),
+          '${Config.baseUrl}/tanker_report_admin?from_date=$date1&to_date=$date2&ni_tanker_no=$tankerno'),
     );
 
     var data = jsonDecode(response.body);

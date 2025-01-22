@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/garage/dashboard_garage.dart';
-import 'package:tankerpcmc/garage/garage_services.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/garage/dashboard_garage.dart';
+import 'package:tankerpmc/garage/garage_services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../getx/controller.dart';
 
@@ -123,7 +123,7 @@ class _GaragelatlongState extends State<Garagelatlong> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://www.pmc.gov.in/mr?main=marathi'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 50,
               ),
             ),
@@ -137,7 +137,7 @@ class _GaragelatlongState extends State<Garagelatlong> {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 13),
                 ),
@@ -175,7 +175,7 @@ class _GaragelatlongState extends State<Garagelatlong> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -362,8 +362,8 @@ class _GaragelatlongState extends State<Garagelatlong> {
                         Center(
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -393,7 +393,7 @@ class _GaragelatlongState extends State<Garagelatlong> {
                                       const SnackBar(
                                         content:
                                             Text('Address Added Successfulyy'),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                       ),
                                     );
                                     nameController.clear();
@@ -446,7 +446,7 @@ class _GaragelatlongState extends State<Garagelatlong> {
             ),
             Container(
                 alignment: Alignment.center,
-                color: Colors.green,
+                color: Colors.blue,
                 height: 50,
                 child: const Text('Google Map',
                     style: TextStyle(

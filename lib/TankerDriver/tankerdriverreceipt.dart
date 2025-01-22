@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:async';
 import 'dart:io';
+import 'package:tankerpmc/widgets/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:typed_data';
@@ -13,8 +14,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
@@ -50,8 +51,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/show_tanker_orders'),
+      Uri.parse('${Config.baseUrl}/show_tanker_orders'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -86,7 +86,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
 
 // https://www.google.com/maps/dir/?api=1&origin=18.6422,73.748&destination=18.629821046666656,73.79543323069811&key=AIzaSyD9XZBYlnwfrKQ1ZK-EUxJtFePKXW_1sfE
   bool isSnackbarVisible = false;
-  bool status1 = false;
+  var status1;
   Future getPendingorder() async {
     setState(() {
       isLoading = true;
@@ -95,8 +95,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
     var token = prefss.getString("token");
     // print(token);
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/show_tanker_orders_pending_new'),
+      Uri.parse('${Config.baseUrl}/show_tanker_orders_pending_new'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -126,8 +125,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
       isLoading = true;
     });
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_cancel_order'),
+      Uri.parse('${Config.baseUrl}/tanker_cancel_order'),
       body: {
         'id': id,
       },
@@ -271,7 +269,7 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
           padding: const EdgeInsets.all(15.0),
           child: Container(
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -329,25 +327,13 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                               itemBuilder: (BuildContext context, int index) {
                                 final data = _dataList[index];
                                 String dateString = data['created_at'];
-                                final projectLat = double.tryParse(
-                                        data["ni_project_lat"] ??
-                                            data["ni_society_lat"]) ??
-                                    0.0;
-                                final projectLong = double.tryParse(
-                                        data["ni_project_long"] ??
-                                            data["ni_society_long"]) ??
-                                    0.0;
-                                final stpLat = double.tryParse(
-                                        data["ni_stp_lat"] ?? "0.0") ??
-                                    0.0;
-                                final stpLong = double.tryParse(
-                                        data["ni_stp_long"] ?? "0.0") ??
-                                    0.0;
-
                                 DateTime date = DateTime.parse(dateString);
                                 String formattedDate =
                                     DateFormat('dd-MM-yyyy').format(date);
-                                var status = data['status'].toString();
+                                status1 = data['status'];
+                                // final String status = "false";
+                                print(
+                                    "Order ID: ${data['id']},Status:$status1");
                                 GlobalKey itemKey = GlobalKey();
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -361,597 +347,551 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
                                           width: 2,
                                         ),
                                       ),
+                                      // height: MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
-                                      child: Stack(children: [
-                                        Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Center(
+                                              child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: Image.asset(
+                                              'assets/pcmc_logo.png',
+                                              scale: 0.3,
                                             ),
-                                            Center(
-                                                child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: Image.asset(
-                                                'assets/pcmc_logo.jpg',
-                                                scale: 0.3,
-                                              ),
-                                            )),
-                                            // if (_isCompletedSelected == true)
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.all(8.0),
-                                            //   child: ElevatedButton(
-                                            //       onPressed: () {
-                                            //         Navigator.push(
-                                            //             context,
-                                            //             MaterialPageRoute(
-                                            //                 builder: (context) =>
-                                            //                     const MapRoute()));
-                                            //         // _captureAndSave(itemKey);
-                                            //         // _shareImage(itemKey);
-                                            //       },
-                                            //       child: Text("View Map")),
-                                            // ),
-
-                                            QrImageView(
-                                              data: data['id'].toString(),
-                                              version: QrVersions.auto,
-                                              size: 100.0,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Reciept No:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "STP/2023/${data['id'].toString()}",
+                                          )),
+                                          // if (_isCompletedSelected == true)
+                                          //   ElevatedButton(
+                                          //       onPressed: () {
+                                          //         _captureAndSave(
+                                          //             itemKey, context);
+                                          //         // _shareImage(itemKey);
+                                          //       },
+                                          //       child: Icon(Icons
+                                          //           .screen_share_outlined)),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          QrImageView(
+                                            data: data['id'].toString(),
+                                            version: QrVersions.auto,
+                                            size: 100.0,
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Reciept No:",
                                                             style: TextStyle(
-                                                                fontSize: 17),
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "STP Name:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            data['ni_nearest_stp']
-                                                                .toString(),
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Water Capacity:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "${data['ni_tanker_capacity'].toString()} Liters",
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Tanker No:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            data['ni_tanker_no']
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Distance:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "${data['ni_distance']}Km",
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Amount:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "₹${data['ni_estimated_amount']}",
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Order Date:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            formattedDate,
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Address:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            data['address']
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                fontSize: 17),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: const [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: Text(
-                                                              "Status:",
-                                                              style: TextStyle(
-                                                                  fontSize: 17,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          if (status
-                                                                  .toString() ==
-                                                              "false")
-                                                            Text(
-                                                              "Pending",
-                                                              style: TextStyle(
-                                                                  fontSize: 17),
-                                                            ),
-                                                          if (status
-                                                                  .toString() ==
-                                                              "null")
-                                                            Text(
-                                                              "Cancelled",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize: 17),
-                                                            ),
-                                                          if (status
-                                                                  .toString() ==
-                                                              "true")
-                                                            Text(
-                                                              "Complete",
-                                                              style: TextStyle(
-                                                                  fontSize: 17),
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                if (status == "false")
-                                                  Visibility(
-                                                    visible: !isSnackbarVisible,
-                                                    child: ElevatedButton(
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .all<Color>(
-                                                                    Colors.red),
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          isSnackbarVisible =
-                                                              true;
-                                                        });
-                                                        cancelorder(data['id']
-                                                            .toString());
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                              SnackBar(
-                                                                backgroundColor:
-                                                                    Colors.red,
-                                                                behavior:
-                                                                    SnackBarBehavior
-                                                                        .floating,
-                                                                content: Text(
-                                                                    "Order Cancelled Successfully"),
-                                                                duration:
-                                                                    const Duration(
-                                                                        seconds:
-                                                                            2),
-                                                              ),
-                                                            )
-                                                            .closed
-                                                            .then((_) {
-                                                          setState(() {
-                                                            isSnackbarVisible =
-                                                                false;
-                                                          });
-                                                        });
-                                                      },
-                                                      child: Text("Cancel"),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Divider(
-                                                  height: 1,
-                                                  color: Colors.black,
-                                                  indent: 120,
-                                                  endIndent: 120,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        if (status.toString() == "false")
-                                          Positioned(
-                                            right: 10,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                String googleMapsUrl =
-                                                    getGoogleMapsUrl(
-                                                  stpLat,
-                                                  stpLong,
-                                                  projectLat,
-                                                  projectLong,
-                                                );
-                                                // ignore: deprecated_member_use
-                                                launch(googleMapsUrl);
-
-                                                // Navigator.push(
-                                                //   context,
-                                                //   MaterialPageRoute(
-                                                //     builder: (context) =>
-                                                //         MapRoute(
-                                                //       startlocation: LatLng(
-                                                //           double.parse(
-                                                //               projectLong),
-                                                //           double.parse(
-                                                //               projectLat)),
-                                                //       endlocation: LatLng(
-                                                //           double.parse(stpLat),
-                                                //           double.parse(stpLong)),
-                                                //     ),
-                                                //   ),
-                                                // );
-                                              },
-                                              child: Row(
-                                                children: const [
-                                                  Text("Route"),
-                                                  Icon(Icons.location_on)
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "STP/2023/${data['id'].toString()}",
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
                                                 ],
                                               ),
-                                            ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "STP Name:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          data['ni_nearest_stp']
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Water Capacity:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "${data['ni_tanker_capacity'].toString()} Liters",
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Tanker No:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          data['ni_tanker_no']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Distance:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "${data['ni_distance'].toString()}Km",
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Amount:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "₹${data['ni_estimated_amount'].toString()}",
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Order Date:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          formattedDate
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Address:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          data['address']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 17),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: const [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Text(
+                                                            "Status:",
+                                                            style: TextStyle(
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        if (status1
+                                                                .toString() ==
+                                                            "false")
+                                                          Text(
+                                                            "Pending",
+                                                            style: TextStyle(
+                                                                fontSize: 17),
+                                                          ),
+                                                        if (status1
+                                                                .toString() ==
+                                                            "null")
+                                                          Text(
+                                                            "Cancelled",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                                fontSize: 17),
+                                                          ),
+                                                        if (status1
+                                                                .toString() ==
+                                                            "true")
+                                                          Text(
+                                                            "Complete",
+                                                            style: TextStyle(
+                                                                fontSize: 17),
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              if (status1.toString() == "false")
+                                                Visibility(
+                                                  visible: !isSnackbarVisible,
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  Colors.red),
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        isSnackbarVisible =
+                                                            true;
+                                                      });
+                                                      cancelorder(data['id']
+                                                          .toString());
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                            SnackBar(
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                              behavior:
+                                                                  SnackBarBehavior
+                                                                      .floating,
+                                                              content: Text(
+                                                                  "Order Cancelled Successfully"),
+                                                              duration:
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          2),
+                                                            ),
+                                                          )
+                                                          .closed
+                                                          .then((_) {
+                                                        setState(() {
+                                                          isSnackbarVisible =
+                                                              false;
+                                                        });
+                                                      });
+                                                    },
+                                                    child: Text("Cancel"),
+                                                  ),
+                                                ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Divider(
+                                                height: 1,
+                                                color: Colors.black,
+                                                indent: 120,
+                                                endIndent: 120,
+                                              ),
+                                            ],
                                           ),
-                                      ]),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
@@ -961,15 +901,15 @@ class _TankerDriverReceiptState extends State<TankerDriverReceipt> {
               )),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

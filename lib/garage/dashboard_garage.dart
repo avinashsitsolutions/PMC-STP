@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/garage/ordertankergarage.dart';
-import 'package:tankerpcmc/garage/recieptgarage.dart';
-import 'package:tankerpcmc/garage/reportgarage.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/garage/ordertankergarage.dart';
+import 'package:tankerpmc/garage/recieptgarage.dart';
+import 'package:tankerpmc/garage/reportgarage.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardGarage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://www.pmc.gov.in/mr?main=marathi'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -75,13 +75,13 @@ class _DashboardGarageState extends State<DashboardGarage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -127,7 +127,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,
@@ -166,7 +166,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,
@@ -205,7 +205,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(15),
                   ),
                   height: 140,

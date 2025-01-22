@@ -8,12 +8,13 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/builder/dashboard_builder.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/builder/dashboard_builder.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 import '../getx/controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 
 class AddBCP extends StatefulWidget {
   const AddBCP({super.key});
@@ -66,7 +67,7 @@ class _AddBCPState extends State<AddBCP> {
   Future getbuilder() async {
     _isLoading = true;
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/water_type'),
+      Uri.parse('${Config.baseUrl}/water_type'),
     );
     var data = json.decode(response.body);
     if (data['error'] == false) {
@@ -137,7 +138,7 @@ class _AddBCPState extends State<AddBCP> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -211,7 +212,7 @@ class _AddBCPState extends State<AddBCP> {
                           decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Colors.green,
+                                color: Color(0xff3d53b1),
                                 width: 1.0,
                               ),
                             ),
@@ -221,7 +222,7 @@ class _AddBCPState extends State<AddBCP> {
 
                             menuMaxHeight: 200,
                             decoration: const InputDecoration(
-                              suffixIconColor: Colors.green,
+                              suffixIconColor: Color(0xff3d53b1),
                               fillColor: Colors.white,
                               hintText: 'Select an option',
                               border: InputBorder.none,
@@ -246,15 +247,15 @@ class _AddBCPState extends State<AddBCP> {
                             },
                             icon: const Icon(
                               Icons.arrow_drop_down,
-                              color: Colors
-                                  .green, // Set the desired color of the icon
+                              color: Color(
+                                  0xff3d53b1), // Set the desired color of the icon
                             ),
-                            // dropdownColor: Colors.green,
+                            // dropdownColor: Colors.blue,
                             onChanged: (newValue) {
                               setState(() {
                                 dropdownValue1 = newValue;
 
-                                if (newValue == 'PCMC Project') {
+                                if (newValue == 'PMC Project') {
                                   // Generate PCMC BCP Number
                                   final String yearLastTwoDigits =
                                       DateTime.now()
@@ -267,7 +268,7 @@ class _AddBCPState extends State<AddBCP> {
                                   final String formattedSerialNumber =
                                       serialNumber.toString();
                                   final String bcpNumber =
-                                      'PCMC/$formattedSerialNumber/$yearLastTwoDigits';
+                                      'PMC/$formattedSerialNumber/$yearLastTwoDigits';
                                   bcpController.text = bcpNumber;
                                 } else {
                                   // Clear BCP Number for Non-PCMC
@@ -276,8 +277,8 @@ class _AddBCPState extends State<AddBCP> {
                               });
                             },
                             items: <String>[
-                              'PCMC Project',
-                              'Non-PCMC Project',
+                              'PMC Project',
+                              'Non-PMC Project',
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -290,7 +291,7 @@ class _AddBCPState extends State<AddBCP> {
                           height: 20,
                         ),
                         const Text(
-                          "Project Commecement No :",
+                          "Project BCP No :",
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.black,
@@ -303,7 +304,7 @@ class _AddBCPState extends State<AddBCP> {
                           controller: bcpController,
                           textCapitalization: TextCapitalization.characters,
                           decoration: const InputDecoration(
-                            hintText: 'Enter Commecement Number',
+                            hintText: 'Enter BCP Number',
                             fillColor: Colors.white,
                             filled: true,
                             contentPadding: EdgeInsets.only(bottom: 4.0),
@@ -320,7 +321,7 @@ class _AddBCPState extends State<AddBCP> {
                           ),
                           validator: (value) {
                             if (value!.isEmpty || value.length < 11) {
-                              return 'Please enter valid Commecement Number';
+                              return 'Please enter valid BCP Number';
                             }
                             return null;
                           },
@@ -375,45 +376,11 @@ class _AddBCPState extends State<AddBCP> {
                         const SizedBox(
                           height: 15,
                         ),
-                        const Text(
-                          "Confirm Password:",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        TextFormField(
-                          controller: confirmpasswordController,
-                          decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            hintText: 'Enter Confirm Password',
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 16.0),
-                            isDense: true,
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 17,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter Confirm Password';
-                            }
-                            return null;
-                          },
-                          style: const TextStyle(
-                            fontSize: 17.0,
-                          ),
-                        ),
                         const SizedBox(
                           height: 5,
                         ),
                         const Text(
-                          "Project Manager Name :",
+                          "Site Manager Name :",
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.black,
@@ -451,7 +418,7 @@ class _AddBCPState extends State<AddBCP> {
                           height: 15,
                         ),
                         const Text(
-                          "Project Manager Mobile No :",
+                          "Site Manager Mobile No :",
                           style: TextStyle(
                               fontSize: 17,
                               color: Colors.black,
@@ -485,42 +452,6 @@ class _AddBCPState extends State<AddBCP> {
                           style: const TextStyle(
                             fontSize: 17.0,
                           ),
-                        ),
-                        const Text(
-                          "Existing Available Water Source:",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        DropDownMultiSelect(
-                          options:
-                              fruits.map((item) => item['water_type']).toList(),
-                          selectedValues: selectedFruits
-                              .map((id) => getStpNameById(id))
-                              .toList(),
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          ),
-                          onChanged: (selectedNames) {
-                            setState(() {
-                              selectedFruits = selectedNames
-                                  .map((name) => getStpIdByName(name))
-                                  .toList();
-                            });
-                          },
-                          // validator: (selectedNames) {
-                          //   if (selectedNames == null ||
-                          //       selectedNames.isEmpty) {
-                          //     return 'Please select at least one water type.';
-                          //   }
-                          //   return '';
-                          // },
-                          whenEmpty:
-                              'Please Select Existing Available Water Source',
                         ),
                         const SizedBox(
                           height: 10,
@@ -702,7 +633,7 @@ class _AddBCPState extends State<AddBCP> {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                                  Color(0xff3e50b5)),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -806,7 +737,7 @@ class _AddBCPState extends State<AddBCP> {
             ),
             Container(
                 alignment: Alignment.center,
-                color: Colors.green,
+                color: Color(0xff3e50b5),
                 height: 50,
                 child: const Text('Google Map',
                     style: TextStyle(

@@ -4,9 +4,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/widgets/constants.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 
 class MapRoute extends StatefulWidget {
   const MapRoute(
@@ -36,11 +36,9 @@ class _MapRouteState extends State<MapRoute> {
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
         }
         setState(() {});
-      } else {
-      }
-    // ignore: empty_catches
-    } catch (e) {
-    }
+      } else {}
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   MapType _currentMapType = MapType.normal;

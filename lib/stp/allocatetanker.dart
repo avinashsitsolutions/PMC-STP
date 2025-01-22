@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/tanker/tankerservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/tanker/tankerservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -22,7 +23,7 @@ class _AllocateTankerState extends State<AllocateTanker> {
     final prefss = await SharedPreferences.getInstance();
     var token = prefss.getString("token");
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/vehicle_name'),
+      Uri.parse('${Config.baseUrl}/vehicle_name'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -60,7 +61,7 @@ class _AllocateTankerState extends State<AllocateTanker> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 height: 400,
                 width: 380,
@@ -161,7 +162,7 @@ class _AllocateTankerState extends State<AllocateTanker> {
                               dropdownColor: Colors.white,
                               icon: const Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.green,
+                                color: Colors.blue,
                               ),
                               onChanged: (newVal) {
                                 setState(() {
@@ -184,7 +185,7 @@ class _AllocateTankerState extends State<AllocateTanker> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
@@ -211,7 +212,7 @@ class _AllocateTankerState extends State<AllocateTanker> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            backgroundColor: Colors.green,
+                                            backgroundColor: Colors.blue,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text(data['message']),
                                             duration:

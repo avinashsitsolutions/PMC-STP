@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/pmc/pmcservices.dart';
+import 'package:tankerpmc/pmc/pmcservices.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/drawerWidget.dart';
@@ -40,7 +40,7 @@ class _AddDepartmentState extends State<AddDepartment> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 50,
               ),
             ),
@@ -51,13 +51,13 @@ class _AddDepartmentState extends State<AddDepartment> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Pimpri-Chinchwad Municipal Corporation",
+                  "Pune Municipal Corporation",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 13),
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 10),
                 ),
@@ -110,7 +110,7 @@ class _AddDepartmentState extends State<AddDepartment> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -329,7 +329,7 @@ class _AddDepartmentState extends State<AddDepartment> {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                                  const Color(0xff3d53b1)),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -355,7 +355,7 @@ class _AddDepartmentState extends State<AddDepartment> {
                                   if (data['error'] == false) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                         behavior: SnackBarBehavior.floating,
                                         content: Text(
                                             "Department Added Successfully !!"),

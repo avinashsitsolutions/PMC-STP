@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/pmc/excelreport.dart';
-import 'package:tankerpcmc/pmc/report1.dart';
-import 'package:tankerpcmc/pmc/report2.dart';
-import 'package:tankerpcmc/pmc/report3.dart';
-import 'package:tankerpcmc/pmc/report4.dart';
-import 'package:tankerpcmc/pmc/report5.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/pmc/excelreport.dart';
+import 'package:tankerpmc/pmc/report1.dart';
+import 'package:tankerpmc/pmc/report2.dart';
+import 'package:tankerpmc/pmc/report3.dart';
+import 'package:tankerpmc/pmc/report4.dart';
+import 'package:tankerpmc/pmc/report5.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
@@ -71,7 +71,7 @@ class _ReportPCMCState extends State<ReportPCMC> {
                   // ignore: deprecated_member_use
                   onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                   child: const Image(
-                    image: AssetImage('assets/pcmc_logo.jpg'),
+                    image: AssetImage('assets/pcmc_logo.png'),
                     height: 50,
                   ),
                 ),
@@ -82,13 +82,13 @@ class _ReportPCMCState extends State<ReportPCMC> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Pimpri-Chinchwad Municipal Corporation",
+                      "Pune Municipal Corporation",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13),
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Treated Water Recycle and Reuse System",
+                      "STP Tanker System",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 10),
                     ),
@@ -121,7 +121,7 @@ class _ReportPCMCState extends State<ReportPCMC> {
                       top: 20, left: 10, right: 10, bottom: 60),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     width: MediaQuery.of(context).size.width,
@@ -265,7 +265,7 @@ class _ReportPCMCState extends State<ReportPCMC> {
                                   decoration: const BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(
-                                        color: Colors.green,
+                                        color: Color(0xff3e50b5),
                                         width: 1.0,
                                       ),
                                     ),
@@ -276,7 +276,7 @@ class _ReportPCMCState extends State<ReportPCMC> {
 
                                     menuMaxHeight: 200,
                                     decoration: const InputDecoration(
-                                      suffixIconColor: Colors.green,
+                                      suffixIconColor: Color(0xff3e50b5),
                                       hintText: 'Select an option',
                                       border: InputBorder.none,
                                       enabledBorder: UnderlineInputBorder(
@@ -299,10 +299,10 @@ class _ReportPCMCState extends State<ReportPCMC> {
                                     },
                                     icon: const Icon(
                                       Icons.arrow_drop_down,
-                                      color: Colors
-                                          .green, // Set the desired color of the icon
+                                      color: Color(
+                                          0xff3d53b1), // Set the desired color of the icon
                                     ),
-                                    // dropdownColor: Colors.green,
+                                    // dropdownColor: Colors.blue,
                                     onChanged: (newValue) {
                                       setState(() {
                                         dropdownValue = newValue;

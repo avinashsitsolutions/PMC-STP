@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/pmc/pmcservices.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/pmc/pmcservices.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AddTankerCap extends StatefulWidget {
@@ -38,7 +38,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 50,
               ),
             ),
@@ -52,7 +52,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 13),
                 ),
@@ -86,7 +86,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 height: 250,
                 width: MediaQuery.of(context).size.width,
@@ -156,7 +156,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Colors.blue),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
@@ -182,7 +182,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
-                                          backgroundColor: Colors.green,
+                                          backgroundColor: Colors.blue,
                                           behavior: SnackBarBehavior.floating,
                                           content: Text(data['message']),
                                           duration: const Duration(seconds: 2),
@@ -195,7 +195,7 @@ class _AddTankerCapState extends State<AddTankerCap> {
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                         behavior: SnackBarBehavior.floating,
                                         content: Text("Something Went Wrong"),
                                         duration: Duration(seconds: 2),

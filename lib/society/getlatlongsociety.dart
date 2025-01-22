@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/society/dashboard_society.dart';
-import 'package:tankerpcmc/society/societyservices.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/society/dashboard_society.dart';
+import 'package:tankerpmc/society/societyservices.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../getx/controller.dart';
@@ -124,7 +124,7 @@ class _SocietylatlongState extends State<Societylatlong> {
               // ignore: deprecated_member_use
               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
               child: const Image(
-                image: AssetImage('assets/pcmc_logo.jpg'),
+                image: AssetImage('assets/pcmc_logo.png'),
                 height: 50,
               ),
             ),
@@ -138,7 +138,7 @@ class _SocietylatlongState extends State<Societylatlong> {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "Treated Water Recycle and Reuse System",
+                  "STP Tanker System",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 13),
                 ),
@@ -176,7 +176,7 @@ class _SocietylatlongState extends State<Societylatlong> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -363,8 +363,8 @@ class _SocietylatlongState extends State<Societylatlong> {
                         Center(
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -394,7 +394,7 @@ class _SocietylatlongState extends State<Societylatlong> {
                                       const SnackBar(
                                         content:
                                             Text('Project Added Successfulyy'),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                       ),
                                     );
                                     nameController.clear();
@@ -447,7 +447,7 @@ class _SocietylatlongState extends State<Societylatlong> {
             ),
             Container(
                 alignment: Alignment.center,
-                color: Colors.green,
+                color: Colors.blue,
                 height: 50,
                 child: const Text('Google Map',
                     style: TextStyle(

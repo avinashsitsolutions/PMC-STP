@@ -21,7 +21,7 @@ class _AppbarwidState extends State<Appbarwid> {
             // ignore: deprecated_member_use
             onTap: () => launch('https://pcmcindia.gov.in/index.php'),
             child: const Image(
-              image: AssetImage('assets/pcmc_logo.jpg'),
+              image: AssetImage('assets/pcmc_logo.png'),
               height: 50,
             ),
           ),
@@ -32,13 +32,13 @@ class _AppbarwidState extends State<Appbarwid> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Pimpri-Chinchwad Municipal Corporation",
+                "Pune Municipal Corporation",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12),
               ),
               SizedBox(height: 5),
               Text(
-                "Treated Water Recycle and Reuse System",
+                "STP Tanker System",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 10),
               ),

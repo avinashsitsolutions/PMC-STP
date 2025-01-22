@@ -2,8 +2,9 @@
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -28,8 +29,7 @@ class _ReceiptPCMCProjectState extends State<ReceiptPCMCProject> {
     var id = prefss.getString("PCMC_user_id");
     // print(token);
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/pmc_recipt_completed'),
+      Uri.parse('${Config.baseUrl}/pmc_recipt_completed'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -63,7 +63,7 @@ class _ReceiptPCMCProjectState extends State<ReceiptPCMCProject> {
     var id = prefss.getString("PCMC_user_id");
     // print(token);
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/pmc_recipt'),
+      Uri.parse('${Config.baseUrl}/pmc_recipt'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -120,7 +120,7 @@ class _ReceiptPCMCProjectState extends State<ReceiptPCMCProject> {
           child: Container(
               // height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -224,7 +224,7 @@ class _ReceiptPCMCProjectState extends State<ReceiptPCMCProject> {
                                           width: 50,
                                           height: 50,
                                           child: Image.asset(
-                                            'assets/pcmc_logo.jpg',
+                                            'assets/pcmc_logo.png',
                                             scale: 0.3,
                                           ),
                                         )),

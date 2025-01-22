@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/Auth/authservices.dart';
-import 'package:tankerpcmc/Auth/registration.dart';
-import 'package:tankerpcmc/TankerDriver/tankerdriverDashboard.dart';
-import 'package:tankerpcmc/builder/dashboard_builder.dart';
-import 'package:tankerpcmc/garage/dashboard_garage.dart';
-import 'package:tankerpcmc/pmc/homepage.dart';
-import 'package:tankerpcmc/pmc_newuser/dashboard.dart';
-import 'package:tankerpcmc/sitemanager/managerdashboard.dart';
-import 'package:tankerpcmc/society/dashboard_society.dart';
-import 'package:tankerpcmc/stp/dashboard_stp.dart';
-import 'package:tankerpcmc/tanker/dashboard_tanker.dart';
-import 'package:tankerpcmc/wardofficer/wardofficerdashboard.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/Auth/authservices.dart';
+import 'package:tankerpmc/Auth/registration.dart';
+import 'package:tankerpmc/TankerDriver/tankerdriverDashboard.dart';
+import 'package:tankerpmc/builder/dashboard_builder.dart';
+import 'package:tankerpmc/garage/dashboard_garage.dart';
+import 'package:tankerpmc/pmc/homepage.dart';
+import 'package:tankerpmc/pmc_newuser/dashboard.dart';
+import 'package:tankerpmc/sitemanager/managerdashboard.dart';
+import 'package:tankerpmc/society/dashboard_society.dart';
+import 'package:tankerpmc/stp/dashboard_stp.dart';
+import 'package:tankerpmc/tanker/dashboard_tanker.dart';
+import 'package:tankerpmc/wardofficer/wardofficerdashboard.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:core';
 
@@ -34,7 +34,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
   Color buttonColor = Colors.grey;
   void _changeColor() {
     setState(() {
-      buttonColor = (const Color.fromARGB(255, 186, 226, 171));
+      buttonColor = (const Color.fromARGB(255, 63, 81, 181));
     });
   }
 
@@ -100,8 +100,8 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                 child: const Padding(
                   padding: EdgeInsets.only(left: 15),
                   child: Image(
-                    image: AssetImage('assets/pcmc_logo.jpg'),
-                    height: 50,
+                    image: AssetImage('assets/pcmc_logo.png'),
+                    height: 80,
                   ),
                 ),
               ),
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
               const Column(
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15),
                   ),
@@ -119,7 +119,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                     height: 7,
                   ),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Water Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -162,7 +162,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                           controller: textController1,
                           textCapitalization: TextCapitalization.characters,
                           decoration: const InputDecoration(
-                            hintText: 'Mobile No/Tanker No/Commecement  No',
+                            hintText: 'Mobile No/Tanker No/BCP No',
                             hintStyle: TextStyle(
                               fontSize: 15,
                             ),
@@ -305,7 +305,12 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                                                               .showSnackBar(
                                                             SnackBar(
                                                               backgroundColor:
-                                                                  Colors.green,
+                                                                  const Color
+                                                                      .fromARGB(
+                                                                      255,
+                                                                      233,
+                                                                      235,
+                                                                      246),
                                                               behavior:
                                                                   SnackBarBehavior
                                                                       .floating,
@@ -372,8 +377,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 backgroundColor:
-                                                                    Colors
-                                                                        .green,
+                                                                    Colors.blue,
                                                                 behavior:
                                                                     SnackBarBehavior
                                                                         .floating,
@@ -439,8 +443,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 backgroundColor:
-                                                                    Colors
-                                                                        .green,
+                                                                    Colors.blue,
                                                                 behavior:
                                                                     SnackBarBehavior
                                                                         .floating,
@@ -1011,7 +1014,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                   },
                   child: const Text(
                     "User Manual",
-                    style: TextStyle(color: Colors.green),
+                    style: TextStyle(color: Color(0xff414b9f)),
                   )),
               Visibility(
                 visible: _isLoading,
@@ -1034,7 +1037,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                           // topLeft: Radius.circular(30),
                           topRight: Radius.circular(50),
                         ),
-                        color: (Color.fromARGB(255, 186, 226, 171)),
+                        color: (Color.fromARGB(255, 63, 81, 181)),
                       ),
                       child: const Center(
                           child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/Auth/authservices.dart';
-import 'package:tankerpcmc/Auth/login.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/Auth/authservices.dart';
+import 'package:tankerpmc/Auth/login.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Registration extends StatefulWidget {
@@ -114,14 +114,14 @@ class _RegistrationState extends State<Registration> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 90,
                 ),
               ),
               const Column(
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14, color: Colors.black),
                   ),
@@ -129,7 +129,7 @@ class _RegistrationState extends State<Registration> {
                     height: 7,
                   ),
                   Text(
-                    " Treated Water Recycle and Reuse System",
+                    " STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13, color: Colors.black),
                   ),
@@ -157,8 +157,8 @@ class _RegistrationState extends State<Registration> {
                     topRight: Radius.circular(50.0),
                     bottomLeft: Radius.circular(50.0),
                   ),
-                  // color: Colors.green
-                  color: (Color.fromARGB(255, 186, 226, 171)),
+                  // color: Colors.blue
+                  color: (Color.fromARGB(255, 62, 80, 181)),
                 ),
                 height: MediaQuery.of(context).size.height * 0.7,
                 child: Padding(
@@ -175,7 +175,7 @@ class _RegistrationState extends State<Registration> {
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.arrow_back),
-                                color: Colors.black,
+                                color: Colors.white,
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               const SizedBox(
@@ -185,7 +185,7 @@ class _RegistrationState extends State<Registration> {
                                 "Register",
                                 style: TextStyle(
                                     fontSize: 25,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -197,7 +197,7 @@ class _RegistrationState extends State<Registration> {
                             "Select User Type:",
                             style: TextStyle(
                                 fontSize: 17,
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
@@ -207,7 +207,7 @@ class _RegistrationState extends State<Registration> {
                             decoration: const BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   width: 1.0,
                                 ),
                               ),
@@ -217,7 +217,7 @@ class _RegistrationState extends State<Registration> {
                               value: dropdownValue,
                               menuMaxHeight: 200,
                               decoration: const InputDecoration(
-                                suffixIconColor: Colors.black,
+                                suffixIconColor: Colors.white,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide.none,
                                 ),
@@ -226,16 +226,16 @@ class _RegistrationState extends State<Registration> {
                                 ),
                               ),
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.bold,
                               ),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                               dropdownColor:
-                                  const Color.fromARGB(255, 186, 226, 171),
+                                  const Color.fromARGB(255, 62, 80, 181),
                               onChanged: (String? newValue) {
                                 setState(() {
                                   _clearTextField();
@@ -314,6 +314,7 @@ class _RegistrationState extends State<Registration> {
                                 'Tanker',
                                 'Builder',
                                 'Society',
+                                'Garage',
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -334,14 +335,14 @@ class _RegistrationState extends State<Registration> {
                                 contentPadding:
                                     const EdgeInsets.only(bottom: 4.0),
                                 hintStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                                 focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                               ),
                               validator: (value) {
@@ -361,7 +362,7 @@ class _RegistrationState extends State<Registration> {
                                 return null;
                               },
                               style: const TextStyle(
-                                  fontSize: 17.0, color: Colors.black),
+                                  fontSize: 17.0, color: Colors.white),
                             ),
                           const SizedBox(
                             height: 15,
@@ -374,14 +375,14 @@ class _RegistrationState extends State<Registration> {
                                 contentPadding:
                                     const EdgeInsets.only(bottom: 4.0),
                                 hintStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                                 focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                               ),
                               validator: (value) {
@@ -391,7 +392,7 @@ class _RegistrationState extends State<Registration> {
                                 return null;
                               },
                               style: const TextStyle(
-                                  fontSize: 17.0, color: Colors.black),
+                                  fontSize: 17.0, color: Colors.white),
                             ),
                           const SizedBox(
                             height: 5,
@@ -405,14 +406,14 @@ class _RegistrationState extends State<Registration> {
                               contentPadding:
                                   const EdgeInsets.only(bottom: 4.0),
                               hintStyle: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 16,
                               ),
                               enabledBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
+                                borderSide: BorderSide(color: Colors.white),
                               ),
                               focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
+                                borderSide: BorderSide(color: Colors.white),
                               ),
                             ),
                             maxLength: 10,
@@ -432,7 +433,7 @@ class _RegistrationState extends State<Registration> {
                               return null;
                             },
                             style: const TextStyle(
-                                fontSize: 17.0, color: Colors.black),
+                                fontSize: 17.0, color: Colors.white),
                           ),
                           const SizedBox(
                             height: 5,
@@ -451,14 +452,14 @@ class _RegistrationState extends State<Registration> {
                                 contentPadding:
                                     const EdgeInsets.only(bottom: 4.0),
                                 hintStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                                 focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: BorderSide(color: Colors.white),
                                 ),
                               ),
                               validator: (value) {
@@ -475,7 +476,7 @@ class _RegistrationState extends State<Registration> {
                                 });
                               },
                               style: const TextStyle(
-                                  fontSize: 17.0, color: Colors.black),
+                                  fontSize: 17.0, color: Colors.white),
                             ),
                           // if (society == true || garage == true)
                           //   SizedBox(
@@ -545,14 +546,14 @@ class _RegistrationState extends State<Registration> {
                               hintText: "Enter Password",
                               contentPadding: EdgeInsets.only(bottom: 4.0),
                               hintStyle: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 16,
                               ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
+                                borderSide: BorderSide(color: Colors.white),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
+                                borderSide: BorderSide(color: Colors.white),
                               ),
                             ),
                             validator: (value) {
@@ -562,7 +563,7 @@ class _RegistrationState extends State<Registration> {
                               return null;
                             },
                             style: const TextStyle(
-                                fontSize: 17.0, color: Colors.black),
+                                fontSize: 17.0, color: Colors.white),
                           ),
                           const SizedBox(
                             height: 15,
@@ -575,7 +576,7 @@ class _RegistrationState extends State<Registration> {
                                         Colors.white),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Color.fromARGB(255, 62, 80, 181)),
                                 shape:
                                     MaterialStateProperty.all<OutlinedBorder>(
                                   const RoundedRectangleBorder(
@@ -880,7 +881,9 @@ class _RegistrationState extends State<Registration> {
                     child: const Center(
                         child: Text(
                       "Powered by Nyati Technologies Pvt Ltd",
-                      style: TextStyle(fontSize: 11, color: Colors.green),
+                      style: TextStyle(
+                          fontSize: 11,
+                          color: Color.fromARGB(255, 62, 80, 181)),
                     )),
                   ),
                 ),

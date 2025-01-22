@@ -2,6 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:tankerpmc/widgets/constants.dart';
+
 class Garageservices {
   static updatelatlong(
     String address,
@@ -11,7 +13,7 @@ class Garageservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/update_garage'),
+      Uri.parse('${Config.baseUrl}/update_garage'),
       body: {
         "id": id,
         "ni_lat": lat,
@@ -28,8 +30,7 @@ class Garageservices {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("id");
     final response = await http.get(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/garage_name_order?id=$id'),
+      Uri.parse('${Config.baseUrl}/garage_name_order?id=$id'),
     );
     var data = jsonDecode(response.body);
     // print(jsonDecode(response.body));
@@ -44,7 +45,7 @@ class Garageservices {
     var id = prefss.getString("id");
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/tanker_info_society?id=$id&ni_tanker_capacity=$capacity&ni_nearest_stp=$stp&ni_user_type=Tanker'),
+          '${Config.baseUrl}/tanker_info_society?id=$id&ni_tanker_capacity=$capacity&ni_nearest_stp=$stp&ni_user_type=Tanker'),
     );
     var data = jsonDecode(response.body);
     return data;
@@ -65,7 +66,7 @@ class Garageservices {
     final prefss = await SharedPreferences.getInstance();
     var garageid = prefss.getString("id");
     final response = await http.post(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/garage_orders'),
+      Uri.parse('${Config.baseUrl}/garage_orders'),
       body: {
         "ni_garage_name": projectname,
         "ni_water_capacity": capacity,
@@ -90,7 +91,7 @@ class Garageservices {
     var id = prefss.getString("id");
     final response = await http.get(
       Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/garage_Report?from_date=$fromdate&to_date=$todate&user_id=$id'),
+          '${Config.baseUrl}/garage_Report?from_date=$fromdate&to_date=$todate&user_id=$id'),
     );
     var data = jsonDecode(response.body);
     return data;

@@ -6,11 +6,11 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/getx/controller.dart';
-import 'package:tankerpcmc/pmc/homepage.dart';
-import 'package:tankerpcmc/pmc/pmcservices.dart';
-import 'package:tankerpcmc/widgets/dimensions.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/getx/controller.dart';
+import 'package:tankerpmc/pmc/homepage.dart';
+import 'package:tankerpmc/pmc/pmcservices.dart';
+import 'package:tankerpmc/widgets/dimensions.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AddStp extends StatefulWidget {
@@ -142,7 +142,7 @@ class _AddStpState extends State<AddStp> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://www.pmc.gov.in/mr?main=marathi'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -153,13 +153,13 @@ class _AddStpState extends State<AddStp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -212,7 +212,7 @@ class _AddStpState extends State<AddStp> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.green[50],
+                    color: Colors.blue[50],
                   ),
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
@@ -646,7 +646,7 @@ class _AddStpState extends State<AddStp> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                        Color(0xff3d53b1)),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         Colors.white),
@@ -680,7 +680,7 @@ class _AddStpState extends State<AddStp> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           const SnackBar(
-                                            backgroundColor: Colors.green,
+                                            backgroundColor: Colors.blue,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text(
                                                 "STP Registered Successfully !!"),
@@ -758,7 +758,7 @@ class _AddStpState extends State<AddStp> {
               ),
               Container(
                   alignment: Alignment.center,
-                  color: Colors.green,
+                  color: const Color(0xff3d53b1),
                   height: 50,
                   child: const Text('Google Map',
                       style: TextStyle(

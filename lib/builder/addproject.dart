@@ -8,9 +8,9 @@
 
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 // // import 'package:location/location.dart';
-// import 'package:tankerpcmc/builder/builderservices.dart';
-// import 'package:tankerpcmc/builder/dashboard_builder.dart';
-// import 'package:tankerpcmc/widgets/drawerwidget.dart';
+// import 'package:tankerpmc/builder/builderservices.dart';
+// import 'package:tankerpmc/builder/dashboard_builder.dart';
+// import 'package:tankerpmc/widgets/drawerwidget.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 // import '../getx/controller.dart';
@@ -137,7 +137,7 @@
 //               // ignore: deprecated_member_use
 //               onTap: () => launch('https://pcmcindia.gov.in/index.php'),
 //               child: const Image(
-//                 image: AssetImage('assets/pcmc_logo.jpg'),
+//                 image: AssetImage('assets/pcmc_logo.png'),
 //                 height: 50,
 //               ),
 //             ),
@@ -151,7 +151,7 @@
 //                 ),
 //                 SizedBox(height: 5),
 //                 Text(
-//                   "Treated Water Recycle and Reuse System",
+//                   "STP Tanker System",
 //                   textAlign: TextAlign.center,
 //                   style: TextStyle(fontSize: 13),
 //                 ),
@@ -189,7 +189,7 @@
 //               child: Container(
 //                 decoration: BoxDecoration(
 //                   borderRadius: BorderRadius.circular(15),
-//                   color: Colors.green[50],
+//                   color: Colors.blue[50],
 //                 ),
 //                 width: MediaQuery.of(context).size.width,
 //                 child: Padding(
@@ -536,7 +536,7 @@
 //                           child: ElevatedButton(
 //                             style: ButtonStyle(
 //                               backgroundColor: MaterialStateProperty.all<Color>(
-//                                   Colors.green),
+//                                   Colors.blue),
 //                               foregroundColor: MaterialStateProperty.all<Color>(
 //                                   Colors.white),
 //                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -571,7 +571,7 @@
 //                                       const SnackBar(
 //                                         content:
 //                                             Text('Project Added Successfulyy'),
-//                                         backgroundColor: Colors.green,
+//                                         backgroundColor: Colors.blue,
 //                                       ),
 //                                     );
 //                                     nameController.clear();
@@ -630,7 +630,7 @@
 //             ),
 //             Container(
 //                 alignment: Alignment.center,
-//                 color: Colors.green,
+//                 color: Colors.blue,
 //                 height: 50,
 //                 child: const Text('Google Map',
 //                     style: TextStyle(

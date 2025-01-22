@@ -2,8 +2,9 @@
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -27,8 +28,7 @@ class _ReceiptManagerState extends State<ReceiptManager> {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("manager_id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/site_manager_recipt'),
+      Uri.parse('${Config.baseUrl}/site_manager_recipt'),
       body: {
         "id": id.toString(),
       },
@@ -56,8 +56,7 @@ class _ReceiptManagerState extends State<ReceiptManager> {
     final prefss = await SharedPreferences.getInstance();
     var id = prefss.getString("manager_id");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/site_manager_recipt_pending_new'),
+      Uri.parse('${Config.baseUrl}/site_manager_recipt_pending_new'),
       body: {
         "id": id.toString(),
       },
@@ -100,7 +99,7 @@ class _ReceiptManagerState extends State<ReceiptManager> {
           padding: const EdgeInsets.all(15.0),
           child: Container(
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               width: MediaQuery.of(context).size.width,
@@ -203,7 +202,7 @@ class _ReceiptManagerState extends State<ReceiptManager> {
                                           width: 50,
                                           height: 50,
                                           child: Image.asset(
-                                            'assets/pcmc_logo.jpg',
+                                            'assets/pcmc_logo.png',
                                             scale: 0.3,
                                           ),
                                         )),
@@ -745,15 +744,15 @@ class _ReceiptManagerState extends State<ReceiptManager> {
               )),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

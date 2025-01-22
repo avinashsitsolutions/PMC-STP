@@ -8,10 +8,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tankerpcmc/pmc_newuser/dashboard.dart';
-import 'package:tankerpcmc/pmc_newuser/services.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/pmc_newuser/dashboard.dart';
+import 'package:tankerpmc/pmc_newuser/services.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/constants.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 
 import '../getx/controller.dart';
 
@@ -51,7 +52,7 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
   final formKey = GlobalKey<FormState>();
   Future<List<Map<String, dynamic>>> cdepartmentname() async {
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/view_department'),
+      Uri.parse('${Config.baseUrl}/view_department'),
     );
 
     var data = json.decode(response.body);
@@ -122,7 +123,7 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.green[50],
+                  color: Colors.blue[50],
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -229,7 +230,7 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
                                   dropdownColor: Colors.white,
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
-                                    color: Colors.green,
+                                    color: Colors.blue,
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -408,8 +409,8 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
                         Center(
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.green),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
                               foregroundColor: MaterialStateProperty.all<Color>(
                                   Colors.white),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -449,7 +450,7 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
                                       const SnackBar(
                                         content:
                                             Text('Project Added Successfulyy'),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Colors.blue,
                                       ),
                                     );
                                     // ignore: use_build_context_synchronously
@@ -502,7 +503,7 @@ class _AddProjectPCMCState extends State<AddProjectPCMC> {
             ),
             Container(
                 alignment: Alignment.center,
-                color: Colors.green,
+                color: Colors.blue,
                 height: 50,
                 child: const Text('Google Map',
                     style: TextStyle(

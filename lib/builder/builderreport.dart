@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
 
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
 class ReportBuilder extends StatefulWidget {
@@ -70,7 +70,7 @@ class _ReportBuilderState extends State<ReportBuilder> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(children: [
@@ -193,7 +193,7 @@ class _ReportBuilderState extends State<ReportBuilder> {
                     TypeAheadField(
                       textFieldConfiguration: TextFieldConfiguration(
                         decoration: const InputDecoration(
-                          hintText: "Select Commecement No First",
+                          hintText: "Select BCP No First",
                           prefixIcon: Icon(Icons.search,
                               color: Color.fromRGBO(0, 0, 0, 1)),
                           hintStyle: TextStyle(
@@ -359,15 +359,15 @@ class _ReportBuilderState extends State<ReportBuilder> {
                         )
             ]),
           )),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

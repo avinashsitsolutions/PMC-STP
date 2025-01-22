@@ -3,9 +3,9 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:intl/intl.dart';
-import 'package:tankerpcmc/tanker/tankerservices.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/tanker/tankerservices.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 
 class ReportTanker extends StatefulWidget {
   const ReportTanker({super.key});
@@ -69,7 +69,7 @@ class _ReportTankerState extends State<ReportTanker> {
               const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 60),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.green[50],
+              color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
             width: MediaQuery.of(context).size.width,
@@ -679,15 +679,15 @@ class _ReportTankerState extends State<ReportTanker> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/bottomimage.png'), // Replace with your image path
-          ),
-        ),
-        height: 70, // Adjust the height of the image
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage(
+      //           'assets/bottomimage.png'), // Replace with your image path
+      //     ),
+      //   ),
+      //   height: 70, // Adjust the height of the image
+      // ),
     );
   }
 }

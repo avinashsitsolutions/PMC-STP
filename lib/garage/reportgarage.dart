@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:tankerpcmc/garage/garage_services.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/garage/garage_services.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 
@@ -49,7 +49,7 @@ class _ReportGarageState extends State<ReportGarage> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://www.pmc.gov.in/mr?main=marathi'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -63,7 +63,7 @@ class _ReportGarageState extends State<ReportGarage> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -95,7 +95,7 @@ class _ReportGarageState extends State<ReportGarage> {
             child: Container(
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Column(children: [

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:tankerpcmc/builder/builderservices.dart';
-import 'package:tankerpcmc/pmc_newuser/receiptpmcproject.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/builder/builderservices.dart';
+import 'package:tankerpmc/pmc_newuser/receiptpmcproject.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'package:http/http.dart' as http;
 // ignore: unused_import
 import 'package:url_launcher/url_launcher.dart';
@@ -74,7 +74,7 @@ class _TankerListPCMCState extends State<TankerListPCMC> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
           behavior: SnackBarBehavior.floating,
           content: Text("Order Added Successfully !!"),
           duration: Duration(seconds: 2),
@@ -117,7 +117,7 @@ class _TankerListPCMCState extends State<TankerListPCMC> {
         padding: const EdgeInsets.all(15.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green[50],
+            color: Colors.blue[50],
             borderRadius: BorderRadius.circular(15),
           ),
           width: MediaQuery.of(context).size.width,

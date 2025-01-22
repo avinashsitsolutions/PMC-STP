@@ -6,19 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/Auth/authservices.dart';
-import 'package:tankerpcmc/Auth/login.dart';
-import 'package:tankerpcmc/TankerDriver/tankerdriverDashboard.dart';
-import 'package:tankerpcmc/builder/dashboard_builder.dart';
-import 'package:tankerpcmc/garage/dashboard_garage.dart';
-import 'package:tankerpcmc/pmc/homepage.dart';
-import 'package:tankerpcmc/pmc_newuser/dashboard.dart';
-import 'package:tankerpcmc/sitemanager/managerdashboard.dart';
-import 'package:tankerpcmc/society/dashboard_society.dart';
-import 'package:tankerpcmc/society/getlatlongsociety.dart';
-import 'package:tankerpcmc/stp/dashboard_stp.dart';
-import 'package:tankerpcmc/tanker/dashboard_tanker.dart';
-import 'package:tankerpcmc/wardofficer/wardofficerdashboard.dart';
+import 'package:tankerpmc/Auth/authservices.dart';
+import 'package:tankerpmc/Auth/login.dart';
+import 'package:tankerpmc/TankerDriver/tankerdriverDashboard.dart';
+import 'package:tankerpmc/builder/dashboard_builder.dart';
+import 'package:tankerpmc/garage/dashboard_garage.dart';
+import 'package:tankerpmc/pmc/homepage.dart';
+import 'package:tankerpmc/pmc_newuser/dashboard.dart';
+import 'package:tankerpmc/sitemanager/managerdashboard.dart';
+import 'package:tankerpmc/society/dashboard_society.dart';
+import 'package:tankerpmc/society/getlatlongsociety.dart';
+import 'package:tankerpmc/stp/dashboard_stp.dart';
+import 'package:tankerpmc/tanker/dashboard_tanker.dart';
+import 'package:tankerpmc/wardofficer/wardofficerdashboard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'internet_connection.dart';
 
@@ -322,45 +322,38 @@ class _SpalshScreenState extends State<SpalshScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 10),
-                  child: Image.asset("assets/pcmc_logo.jpg", scale: 4),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, right: 10),
-                  child: Image.asset("assets/bharat.png", scale: 7),
-                ),
-              ],
+              children: [],
             ),
             Column(
               children: [
-                Image.asset("assets/TWRRS.png", scale: 6),
+                Image.asset("assets/TWRRS.png", scale: 1),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Pimpri-Chinchwad Municipal Corporation",
+                  "Pune Municipal Corporation",
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green.shade500),
+                      color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                Text(
+                  "STP Water Tanker System",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset("assets/swachha.jpg", scale: 4),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10, right: 10),
-                  child: Image.asset("assets/vasundhara.jpg", scale: 5),
-                ),
-              ],
+              children: [],
             ),
           ],
         ),

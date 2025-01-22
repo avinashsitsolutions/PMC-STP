@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/pmc_newuser/addproject_pmc.dart';
-import 'package:tankerpcmc/pmc_newuser/receiptpmcproject.dart';
-import 'package:tankerpcmc/pmc_newuser/reportpmcproject.dart';
+import 'package:tankerpmc/pmc_newuser/addproject_pmc.dart';
+import 'package:tankerpmc/pmc_newuser/receiptpmcproject.dart';
+import 'package:tankerpmc/pmc_newuser/reportpmcproject.dart';
 
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'ordertanker_pmc.dart';
@@ -68,7 +68,7 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -82,7 +82,7 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -130,7 +130,7 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 120,
@@ -165,11 +165,11 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OrderTankerPCMC()));
+                            builder: (context) => const Ordertankerpmc()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 120,
@@ -208,7 +208,7 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 120,
@@ -247,7 +247,7 @@ class _DashboardPCMCUSERState extends State<DashboardPCMCUSER> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 120,

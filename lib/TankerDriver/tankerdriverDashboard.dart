@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tankerpcmc/TankerDriver/tankerdriverreceipt.dart';
-import 'package:tankerpcmc/TankerDriver/tankerdriverrreport.dart';
-import 'package:tankerpcmc/widgets/drawerwidget.dart';
-import 'package:tankerpcmc/widgets/internet.dart';
+import 'package:tankerpmc/TankerDriver/tankerdriverreceipt.dart';
+import 'package:tankerpmc/TankerDriver/tankerdriverrreport.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
+import 'package:tankerpmc/widgets/internet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardTankerDriver extends StatefulWidget {
@@ -64,7 +64,7 @@ class _DashboardTankerDriverState extends State<DashboardTankerDriver> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -75,13 +75,13 @@ class _DashboardTankerDriverState extends State<DashboardTankerDriver> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Pimpri-Chinchwad Municipal Corporation",
+                    "Pune Municipal Corporation",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10),
                   ),
@@ -129,7 +129,7 @@ class _DashboardTankerDriverState extends State<DashboardTankerDriver> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 140,
@@ -168,7 +168,7 @@ class _DashboardTankerDriverState extends State<DashboardTankerDriver> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Colors.blue[50],
                       borderRadius: BorderRadius.circular(15),
                     ),
                     height: 140,
@@ -199,15 +199,15 @@ class _DashboardTankerDriverState extends State<DashboardTankerDriver> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                  'assets/bottomimage.png'), // Replace with your image path
-            ),
-          ),
-          height: 70, // Adjust the height of the image
-        ),
+        // bottomNavigationBar: Container(
+        //   decoration: const BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage(
+        //           'assets/bottomimage.png'), // Replace with your image path
+        //     ),
+        //   ),
+        //   height: 70, // Adjust the height of the image
+        // ),
       ),
     );
   }

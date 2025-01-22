@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tankerpcmc/stp/neworderstp.dart';
+import 'package:tankerpmc/stp/neworderstp.dart';
+import 'package:tankerpmc/widgets/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/drawerWidget.dart';
@@ -32,7 +33,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
   Future getData() async {
     var id = widget.scannedData;
     final response = await http.get(
-      Uri.parse('https://pcmcstp.stockcare.co.in/public/api/qr/$id'),
+      Uri.parse('${Config.baseUrl}/qr/$id'),
     );
     var data = json.decode(response.body);
     if (data['error'] == true) {
@@ -48,8 +49,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     final response = await http.post(
-      Uri.parse(
-          'https://pcmcstp.stockcare.co.in/public/api/project_orders_update/$id'),
+      Uri.parse('${Config.baseUrl}/project_orders_update/$id'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': ' application/json',
@@ -85,7 +85,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
                 // ignore: deprecated_member_use
                 onTap: () => launch('https://pcmcindia.gov.in/index.php'),
                 child: const Image(
-                  image: AssetImage('assets/pcmc_logo.jpg'),
+                  image: AssetImage('assets/pcmc_logo.png'),
                   height: 50,
                 ),
               ),
@@ -99,7 +99,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Treated Water Recycle and Reuse System",
+                    "STP Tanker System",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13),
                   ),
@@ -143,7 +143,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.green[50],
+                        color: Colors.blue[50],
                         borderRadius: BorderRadius.circular(15),
                       ),
                       width: MediaQuery.of(context).size.width,
@@ -678,7 +678,7 @@ class _ScannedDataPageState extends State<ScannedDataPage> {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(
-                                                backgroundColor: Colors.green,
+                                                backgroundColor: Colors.blue,
                                                 behavior:
                                                     SnackBarBehavior.floating,
                                                 content: Text(

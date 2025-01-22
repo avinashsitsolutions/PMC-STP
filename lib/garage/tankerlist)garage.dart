@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:http/http.dart' as http;
-import 'package:tankerpcmc/garage/garage_services.dart';
-import 'package:tankerpcmc/garage/recieptgarage.dart';
-import 'package:tankerpcmc/widgets/appbar.dart';
-import 'package:tankerpcmc/widgets/drawerWidget.dart';
+import 'package:tankerpmc/garage/garage_services.dart';
+import 'package:tankerpmc/garage/recieptgarage.dart';
+import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerWidget.dart';
 // ignore: unused_import
 import 'package:url_launcher/url_launcher.dart';
 
@@ -74,7 +74,7 @@ class _TankerListGarageState extends State<TankerListGarage> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
           behavior: SnackBarBehavior.floating,
           content: Text("Order Added Successfully !!"),
           duration: Duration(seconds: 2),
@@ -117,7 +117,7 @@ class _TankerListGarageState extends State<TankerListGarage> {
         padding: const EdgeInsets.all(15.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green[50],
+            color: Colors.blue[50],
             borderRadius: BorderRadius.circular(15),
           ),
           width: MediaQuery.of(context).size.width,
