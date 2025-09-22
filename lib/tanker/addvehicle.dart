@@ -473,7 +473,7 @@ class _AddVehicleState extends State<AddVehicle> {
                         if (dropdownValue2 == 'Private')
                           DropDownMultiSelect(
                             options: fruits
-                                .map((item) => item['full_name'])
+                                .map((item) => item['full_name'].toString())
                                 .toList(),
                             selectedValues: selectedFruits
                                 .map((id) => getStpNameById(id))

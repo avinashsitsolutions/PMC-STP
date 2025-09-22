@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
+//import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
@@ -287,22 +287,22 @@ class _SpalshScreenState extends State<SpalshScreen> {
     );
   }
 
-  Future<void> checkPermissions() async {
-    final connectivityResult = await Connectivity().checkConnectivity();
-    final hasPermissions = await requestPermissions();
-    if (mounted) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => InternetConnectivityScreen()));
-    }
-    if (connectivityResult == ConnectivityResult.none) {
-    } else if (!hasPermissions) {
-      showPermissionErrorDialog(context);
-    } else {
-      return;
-    }
-  }
+  // Future<void> checkPermissions() async {
+  //   final connectivityResult = await Connectivity().checkConnectivity();
+  //   final hasPermissions = await requestPermissions();
+  //   if (mounted) {
+  //     Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => InternetConnectivityScreen()));
+  //   }
+  //   if (connectivityResult == ConnectivityResult.none) {
+  //   } else if (!hasPermissions) {
+  //     showPermissionErrorDialog(context);
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   @override
   void initState() {

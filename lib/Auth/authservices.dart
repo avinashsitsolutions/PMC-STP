@@ -72,6 +72,7 @@ class Authservices {
     // print(response.body);
     var data = jsonDecode(response.body);
     setLoading(false);
+    print(data);
     return data;
   }
 
@@ -104,6 +105,7 @@ class Authservices {
     );
     var data = jsonDecode(response.body);
     setLoading(false);
+    print(data);
     return data;
   }
 

@@ -502,7 +502,7 @@ class _UpdateTankerState extends State<UpdateTanker> {
                               ),
                               DropDownMultiSelect(
                                 options: fruits
-                                    .map((item) => item['full_name'])
+                                    .map((item) => item['full_name'].toString())
                                     .toList(),
                                 selectedValues: selectedBuilders
                                     .map((id) => getStpNameById(id))

@@ -301,7 +301,7 @@ class _OfficerRegistrationState extends State<OfficerRegistration> {
                             decoration: const InputDecoration(
                                 filled: true, fillColor: Colors.white),
                             options: fruits
-                                .map((item) => item['ni_stp_name'])
+                                .map((item) => item['ni_stp_name'].toString())
                                 .toList(),
                             selectedValues: selectedFruits
                                 .map((id) => getStpNameById(id))

@@ -1,0 +1,31 @@
+pmc stp app water tanker system
+
+commented signingConfigs for release and changed signinConfig signingConfig.debug
+refer https://docs.flutter.dev/deployment/android
+
+its live on playstore https://play.google.com/store/apps/details?id=com.nyatitechnologies.pmctanker&hl=en_US
+
+login credential 
+admin login : userId = 9999999999
+			  password = 1234577
+
+Admin Login[web] : userId = admin@gmail.com
+				   password = 1234577
+
+Builder Login : userId = 7030531445
+				password = 1234567
+
+Project Manager : userId = PCMC/12345/23
+				  password = 12345
+
+Tanker Driver : userId = MH14DW8506
+				password = 12345
+
+Tanker Owner : userId = 9881604554
+			   password = 12345
+
+
+// use fvm in this project 
+//Version    │ Channel │ Flutter Version      │ Dart Version    │ Release Date 
+// 3.24.4     │ stable  │ 3.24.4               │ 3.5.4           │ Oct 24, 2024 
+

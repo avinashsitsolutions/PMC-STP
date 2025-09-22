@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,10 +10,17 @@ import 'package:tankerpmc/Auth/splashscreen.dart';
 AndroidMapRenderer mapRenderer = AndroidMapRenderer.platformDefault;
 
 Future<void> main() async {
-  final GoogleMapsFlutterPlatform mapsImplementation =
-      GoogleMapsFlutterPlatform.instance;
-  final GoogleMapsFlutterPlatform platform = GoogleMapsFlutterPlatform.instance;
-  (platform as GoogleMapsFlutterAndroid).useAndroidViewSurface = true;
+  // final GoogleMapsFlutterPlatform mapsImplementation =
+  //     GoogleMapsFlutterPlatform.instance;
+  // final GoogleMapsFlutterPlatform platform = GoogleMapsFlutterPlatform.instance;
+  // (platform as GoogleMapsFlutterAndroid).useAndroidViewSurface = true;
+  if (Platform.isAndroid) {
+    final GoogleMapsFlutterPlatform platformInstance =
+        GoogleMapsFlutterPlatform.instance;
+    if (platformInstance is GoogleMapsFlutterAndroid) {
+      platformInstance.useAndroidViewSurface = true;
+    }
+  }
 
   WidgetsFlutterBinding.ensureInitialized();
   final connectivityResult = await (Connectivity().checkConnectivity());
