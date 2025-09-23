@@ -771,25 +771,27 @@ class _AddStpState extends State<AddStp> {
                 child: GoogleMap(
                   onMapCreated: _onMapCreated,
                   myLocationEnabled: true,
+                  myLocationButtonEnabled:
+                      true, // 👈 add this for iOS (shows location button)
+                  compassEnabled: true, // 👈 helps debugging iOS gray screen
+                  trafficEnabled: false, // optional, keeps map lighter
+                  buildingsEnabled: true,
+                  mapToolbarEnabled: true, // 👈 for iOS map interactions
                   mapType: _currentMapType,
                   initialCameraPosition: const CameraPosition(
                     target: LatLng(18.628197028586005, 73.80619029626678),
                     zoom: 14.0,
                   ),
-                  gestureRecognizers: Set()
-                    ..add(Factory<OneSequenceGestureRecognizer>(
-                        () => EagerGestureRecognizer()))
-                    ..add(Factory<PanGestureRecognizer>(
-                        () => PanGestureRecognizer()))
-                    ..add(Factory<ScaleGestureRecognizer>(
-                        () => ScaleGestureRecognizer()))
-                    ..add(Factory<TapGestureRecognizer>(
-                        () => TapGestureRecognizer()))
-                    ..add(Factory<VerticalDragGestureRecognizer>(
-                        () => VerticalDragGestureRecognizer())),
-                  // double distance = await Geolocator.distanceBetween(
-                  //     18.487500, 73.857023, 18.4864727, 73.79683399999999);
-                  // print('Distance: $distance meters');
+                  gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                    Factory<OneSequenceGestureRecognizer>(
+                        () => EagerGestureRecognizer()),
+                    Factory<PanGestureRecognizer>(() => PanGestureRecognizer()),
+                    Factory<ScaleGestureRecognizer>(
+                        () => ScaleGestureRecognizer()),
+                    Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+                    Factory<VerticalDragGestureRecognizer>(
+                        () => VerticalDragGestureRecognizer()),
+                  },
                   markers: Set.of(_marker != null ? [_marker!] : []),
                   onTap: (LatLng latLng) async {
                     final LocationController locationController =
@@ -799,25 +801,20 @@ class _AddStpState extends State<AddStp> {
                         latLng.latitude, latLng.longitude);
 
                     Placemark place1 = placemarks[0];
-                    Placemark place2 = placemarks[2];
 
                     locationController.setLocationDetails(
-                        latLng.latitude,
-                        latLng.longitude,
-                        "${place1.name},${place2.name},${place1.subLocality},${place1.locality},${place1.administrativeArea},${place1.postalCode}");
-
-                    setState(() {});
-                    _markers.remove(_marker);
+                      latLng.latitude,
+                      latLng.longitude,
+                      "${place1.name}, ${place1.locality}, ${place1.administrativeArea}, ${place1.postalCode}",
+                    );
 
                     setState(() {
+                      _markers.clear();
                       _marker = Marker(
                         markerId: const MarkerId('currentMarker'),
                         position: latLng,
                         draggable: true,
-                        onDragEnd: (LatLng newPosition) async {
-                          // double latitude = newPosition.latitude;
-                          // double longitude = newPosition.longitude;
-
+                        onDragEnd: (LatLng newPosition) {
                           setState(() {
                             _marker =
                                 _marker!.copyWith(positionParam: newPosition);

@@ -47,5 +47,19 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<!-- ✅ Required for Google Maps in Flutter -->
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+
+	<!-- ✅ Location permission descriptions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires your location to select project site on map.</string>
+
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses your location to improve tanker and project tracking.</string>
+
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app uses your location for project mapping and tanker allocation.</string>
 </dict>
 </plist>

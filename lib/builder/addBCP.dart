@@ -65,21 +65,30 @@ class _AddBCPState extends State<AddBCP> {
 
   bool _isLoading = true;
   Future getbuilder() async {
-    _isLoading = true;
-    final response = await http.get(
-      Uri.parse('${Config.baseUrl}/water_type'),
-    );
-    var data = json.decode(response.body);
-    if (data['error'] == false) {
-      setState(() {
-        fruits = data['data'];
+    try {
+      _isLoading = true;
+      final response =
+          await http.get(Uri.parse('${Config.baseUrl}/water_type'));
 
-        _isLoading = false;
-      });
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+
+        if (data is Map && data['error'] == false) {
+          setState(() {
+            fruits = data['data'] ?? [];
+            _isLoading = false;
+          });
+        } else {
+          setState(() => _isLoading = false);
+          debugPrint("Unexpected API format: $data");
+        }
+      } else {
+        debugPrint("Server error: ${response.statusCode}");
+        setState(() => _isLoading = false);
+      }
+    } catch (e) {
+      debugPrint("Error fetching builder data: $e");
+      setState(() => _isLoading = false);
     }
   }
 
@@ -774,29 +783,39 @@ class _AddBCPState extends State<AddBCP> {
                   final LocationController locationController =
                       Get.put(LocationController());
 
-                  List<Placemark> placemarks = await placemarkFromCoordinates(
-                      latLng.latitude, latLng.longitude);
+                  try {
+                    List<Placemark> placemarks = await placemarkFromCoordinates(
+                        latLng.latitude, latLng.longitude);
 
-                  Placemark place1 = placemarks[0];
-                  Placemark place2 = placemarks[2];
+                    if (placemarks.isNotEmpty) {
+                      Placemark place1 = placemarks[0];
+                      Placemark? place2 = placemarks.length > 1
+                          ? placemarks[1]
+                          : null; // 👈 safe
 
-                  locationController.setLocationDetails(
-                      latLng.latitude,
-                      latLng.longitude,
-                      "${place1.name},${place2.name},${place1.subLocality},${place1.locality},${place1.administrativeArea},${place1.postalCode}");
+                      String address =
+                          "${place1.name ?? ''}, ${place2?.name ?? ''}, ${place1.subLocality ?? ''}, ${place1.locality ?? ''}, ${place1.administrativeArea ?? ''}, ${place1.postalCode ?? ''}";
 
-                  setState(() {});
-                  _markers.remove(_marker);
+                      locationController.setLocationDetails(
+                        latLng.latitude,
+                        latLng.longitude,
+                        address,
+                      );
+                    }
+                  } catch (e) {
+                    debugPrint("Geocoding error: $e");
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Could not fetch address")),
+                    );
+                  }
 
                   setState(() {
+                    _markers.clear();
                     _marker = Marker(
                       markerId: const MarkerId('currentMarker'),
                       position: latLng,
                       draggable: true,
-                      onDragEnd: (LatLng newPosition) async {
-                        // double latitude = newPosition.latitude;
-                        // double longitude = newPosition.longitude;
-
+                      onDragEnd: (LatLng newPosition) {
                         setState(() {
                           _marker =
                               _marker!.copyWith(positionParam: newPosition);
