@@ -15,10 +15,10 @@ Admin Login[web] : userId = admin@gmail.com
 Builder Login : userId = 7030531445
 				password = 1234567
 
-Project Manager : userId = PCMC/12345/23
+Project Manager : userId = NYATI/007/24
 				  password = 12345
 
-Tanker Driver : userId = MH14DW8506
+Tanker Driver : userId = MH14DW8507
 				password = 12345
 
 Tanker Owner : userId = 9881604554
