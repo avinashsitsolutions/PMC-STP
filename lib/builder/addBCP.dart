@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:multiselect/multiselect.dart';
 import 'package:tankerpmc/builder/builderservices.dart';
 import 'package:tankerpmc/builder/dashboard_builder.dart';
 import 'package:tankerpmc/widgets/constants.dart';

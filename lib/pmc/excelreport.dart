@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column;
 import 'dart:io';
 import 'package:tankerpmc/pmc/pmcservices.dart';
 import 'package:tankerpmc/widgets/appbar.dart';
+import 'package:tankerpmc/widgets/drawerwidget.dart';
 
 class ExcelReports extends StatefulWidget {
   const ExcelReports({Key? key}) : super(key: key);
@@ -529,6 +530,7 @@ class _ExcelReportsState extends State<ExcelReports> {
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: Appbarwid(),
       ),
+      endDrawer: const DrawerWid(),
       body: Column(
         children: [
           const SizedBox(height: 20),

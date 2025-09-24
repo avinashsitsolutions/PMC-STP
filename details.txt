@@ -7,7 +7,7 @@ its live on playstore https://play.google.com/store/apps/details?id=com.nyatitec
 
 login credential 
 admin login : userId = 9999999999
-			  password = 1234577
+			  password = 1234567
 
 Admin Login[web] : userId = admin@gmail.com
 				   password = 1234577

@@ -981,7 +981,7 @@ class _LoginState extends State<Login> with AutomaticKeepAliveClientMixin {
                 },
                 child: const Text(
                   'Log In',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
               Row(

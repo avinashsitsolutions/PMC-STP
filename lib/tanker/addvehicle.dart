@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:multiselect/multiselect.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tankerpmc/tanker/dashboard_tanker.dart';
 import 'package:tankerpmc/tanker/tankerservices.dart';
@@ -8,6 +7,7 @@ import 'package:tankerpmc/widgets/constants.dart';
 import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tankerpmc/widgets/dropdown_multiselect.dart';
 
 class AddVehicle extends StatefulWidget {
   const AddVehicle({super.key});

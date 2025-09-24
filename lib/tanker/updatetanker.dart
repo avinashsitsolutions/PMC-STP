@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:multiselect/multiselect.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tankerpmc/tanker/dashboard_tanker.dart';
 import 'package:tankerpmc/tanker/tankerservices.dart';
@@ -9,6 +8,7 @@ import 'package:tankerpmc/widgets/constants.dart';
 import 'package:tankerpmc/widgets/drawerwidget.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tankerpmc/widgets/dropdown_multiselect.dart';
 
 class UpdateTanker extends StatefulWidget {
   const UpdateTanker({
@@ -49,6 +49,9 @@ class _UpdateTankerState extends State<UpdateTanker> {
   bool loadingButton = false;
   List categoryItemlist2 = [];
   List categoryItemlist = [];
+  Map<int, String> stpIdToName = {};
+  Map<String, int> stpNameToId = {};
+
   // MapType _currentMapType = MapType.normal;
   String mb = '0';
   Random random = Random();
@@ -77,17 +80,32 @@ class _UpdateTankerState extends State<UpdateTanker> {
   var dropdownValue3;
   bool _isLoading = true;
   String? dropdownValue2 = 'Public';
-  String getStpNameById(int id) {
-    // Assuming 'fruits' is the list containing the STP data
-    var stp = fruits.firstWhere((item) => item['id'] == id, orElse: () => null);
-    return stp != null ? stp['full_name'] : null;
+
+  String? getStpNameById(dynamic id) {
+    try {
+      final stp = fruits.firstWhere(
+        (item) => item['id'].toString() == id.toString(),
+        orElse: () => <String, dynamic>{}, // return empty map instead of null
+      );
+      return stp['full_name']?.toString();
+    } catch (e) {
+      return null;
+    }
   }
 
-  int getStpIdByName(String name) {
-    // Assuming 'fruits' is the list containing the STP data
-    var stp = fruits.firstWhere((item) => item['full_name'] == name,
-        orElse: () => null);
-    return stp != null ? stp['id'] : null;
+  int? getStpIdByName(String name) {
+    try {
+      final stp = fruits.firstWhere(
+        (item) => item['full_name'].toString() == name,
+        orElse: () => <String, dynamic>{}, // empty map avoids null crash
+      );
+      if (stp['id'] is int) {
+        return stp['id'] as int;
+      }
+      return int.tryParse(stp['id']?.toString() ?? '');
+    } catch (e) {
+      return null;
+    }
   }
 
   Future getbuilder() async {
@@ -99,6 +117,16 @@ class _UpdateTankerState extends State<UpdateTanker> {
     if (data['error'] == false) {
       setState(() {
         fruits = data['data'];
+
+        // ✅ assign, not declare
+        stpIdToName = {
+          for (var item in fruits)
+            item['id'] as int: item['full_name'].toString(),
+        };
+        stpNameToId = {
+          for (var item in fruits)
+            item['full_name'].toString(): item['id'] as int,
+        };
 
         _isLoading = false;
       });
@@ -501,35 +529,36 @@ class _UpdateTankerState extends State<UpdateTanker> {
                                     fontWeight: FontWeight.bold),
                               ),
                               DropDownMultiSelect(
-                                options: fruits
-                                    .map((item) => item['full_name'].toString())
-                                    .toList(),
+                                options: stpNameToId.keys.toList(),
+                                // options: fruits
+                                //     .map((item) => item['full_name'].toString())
+                                //     .toList(),
                                 selectedValues: selectedBuilders
                                     .map((id) => getStpNameById(id))
+                                    .whereType<
+                                        String>() // filters out nulls safely
                                     .toList(),
                                 decoration: const InputDecoration(
                                   contentPadding:
                                       EdgeInsets.symmetric(vertical: 20),
+                                  suffixIcon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Color(0xff3e50b5),
+                                  ),
                                 ),
                                 onChanged: (selectedNames) {
-                                  if (selectedNames.length <=
-                                      maxSelectionLimit) {
-                                    setState(() {
-                                      selectedBuilders = selectedNames
-                                          .map((name) => getStpIdByName(name))
-                                          .toList();
-                                    });
-                                  } else {
-                                    setState(() {
-                                      selectedBuilders = selectedNames
-                                          .sublist(0, maxSelectionLimit)
-                                          .map((name) => getStpIdByName(name))
-                                          .toList();
-                                    });
-                                  }
+                                  setState(() {
+                                    selectedBuilders = selectedNames
+                                        .map((name) =>
+                                            getStpIdByName(name) ??
+                                            0) // default if null
+                                        .where((id) =>
+                                            id != 0) // keep only valid ids
+                                        .toList();
+                                  });
                                 },
                                 whenEmpty: 'Select your Builder',
-                              ),
+                              )
                             ],
                           ),
                         const SizedBox(

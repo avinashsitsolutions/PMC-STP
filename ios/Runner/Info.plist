@@ -45,8 +45,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
 
 	<!-- ✅ Required for Google Maps in Flutter -->
 	<key>io.flutter.embedded_views_preview</key>
