@@ -15,6 +15,8 @@ class _AppbarwidState extends State<Appbarwid> {
       titleSpacing: 0,
       toolbarHeight: 150,
       centerTitle: true,
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
       title: Row(
         children: [
           InkWell(
