@@ -97,6 +97,8 @@ class _DashboardState extends State<Dashboard> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0, // ✅ remove shadow
+          scrolledUnderElevation: 0, // ✅ remove shadow on scroll
           titleSpacing: 0,
           centerTitle: true,
           title: Row(
@@ -143,108 +145,112 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
         endDrawer: const DrawerWid(),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-          child: count.isNotEmpty
-              ? GridView.builder(
-                  itemCount: count.length,
-                  // ✅ allow scrolling
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: screenWidth * 0.04,
-                    crossAxisCount: screenWidth > 1200
-                        ? 4 // desktops/large screens
-                        : screenWidth > 800
-                            ? 3 // tablets/iPads
-                            : 2, // phones
-                    childAspectRatio: screenWidth / (screenHeight * 0.55),
-                  ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        switch (index) {
-                          case 0:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const BuilderList()));
-                            break;
-                          case 1:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const TankerList()));
-                            break;
-                          case 2:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const StpList()));
-                            break;
-                          case 3:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const OrderList()));
-                            break;
-                          case 4:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const TodayReceipt()));
-                            break;
-                          case 5:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const DailySupply()));
-                            break;
-                        }
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top: screenHeight * 0.03),
-                        decoration: BoxDecoration(
-                          color: Colors.blue[50],
-                          borderRadius: BorderRadius.circular(20),
+
+        // ✅ Fix: Wrap body in SafeArea
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+            child: count.isNotEmpty
+                ? GridView.builder(
+                    itemCount: count.length,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: screenWidth * 0.04,
+                      crossAxisCount: screenWidth > 1200
+                          ? 4 // desktops
+                          : screenWidth > 800
+                              ? 3 // tablets
+                              : 2, // phones
+                      // ✅ keep ratio safe, avoid overflow
+                      childAspectRatio: screenWidth / (screenHeight * 0.6),
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          switch (index) {
+                            case 0:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BuilderList()));
+                              break;
+                            case 1:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TankerList()));
+                              break;
+                            case 2:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const StpList()));
+                              break;
+                            case 3:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const OrderList()));
+                              break;
+                            case 4:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TodayReceipt()));
+                              break;
+                            case 5:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DailySupply()));
+                              break;
+                          }
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(top: screenHeight * 0.03),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: screenWidth * 0.07,
+                                child: Image.asset(
+                                  imagePaths[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(height: screenHeight * 0.015),
+                              Text(
+                                count[index],
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.05,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: screenHeight * 0.015),
+                              Text(
+                                text[index],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: screenWidth * 0.07,
-                              child: Image.asset(
-                                imagePaths[index],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: screenHeight * 0.015),
-                            Text(
-                              count[index],
-                              style: TextStyle(
-                                fontSize: screenWidth * 0.05,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: screenHeight * 0.015),
-                            Text(
-                              text[index],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: screenWidth * 0.04,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                )
-              : SizedBox(
-                  height: screenHeight * 0.5,
-                  child: const Center(child: CircularProgressIndicator()),
-                ),
+                      );
+                    },
+                  )
+                : const Center(child: CircularProgressIndicator()),
+          ),
         ),
       ),
     );
