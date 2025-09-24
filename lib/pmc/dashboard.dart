@@ -99,6 +99,7 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           elevation: 0, // ✅ remove shadow
           scrolledUnderElevation: 0, // ✅ remove shadow on scroll
+          backgroundColor: Colors.white,
           titleSpacing: 0,
           centerTitle: true,
           title: Row(
