@@ -126,7 +126,7 @@ class _Report5State extends State<Report5> {
                         height: 10,
                       ),
                       Text(
-                        "From-Date :${formatDate(widget.date1)}   To  TO-Date:${formatDate(widget.date2)}",
+                        "From-Date :${formatDate(widget.date1)} To  TO-Date:${formatDate(widget.date2)}",
                         style: const TextStyle(fontSize: 16),
                       ),
                       const SizedBox(
