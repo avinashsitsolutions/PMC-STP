@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
 import 'package:intl/intl.dart';
 import 'package:tankerpmc/tanker/tankerservices.dart';
 import 'package:tankerpmc/widgets/appbar.dart';
@@ -16,46 +15,40 @@ class ReportTanker extends StatefulWidget {
 
 class _ReportTankerState extends State<ReportTanker> {
   List<dynamic> _dataList = [];
-  var dropdownValue;
   String _selectedOption = '';
-  List<String> tankerno = [];
-  String check = "True";
-  List<dynamic> options = [];
-  String selectedTankerId = "";
-  List<Map<String, dynamic>> _tankerDataList = []; // Add this line
-
+  List<Map<String, dynamic>> _tankerDataList = [];
   List<dynamic> _tankerNumbers = [];
-  // List to store the API response
+  String check = "True";
+  String selectedTankerId = "";
   TextEditingController _typeAheadController = TextEditingController();
-  final int _selectedOptionId = 0;
-  bool onchange = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _dateController2 = TextEditingController();
   final TextEditingController _dateController1 = TextEditingController();
+  var status;
+
   @override
   void initState() {
     super.initState();
     Tankerservices.viewtankerlist().then((data) {
       if (data['error'] == false) {
         setState(() {
-          List<dynamic> responseData = data['data'];
-
-          setState(() {
-            _tankerDataList = List<Map<String, dynamic>>.from(data['data']);
-            _tankerNumbers =
-                _tankerDataList.map((item) => item['ni_tanker_no']).toList();
-          });
+          _tankerDataList = List<Map<String, dynamic>>.from(data['data']);
+          _tankerNumbers =
+              _tankerDataList.map((item) => item['ni_tanker_no']).toList();
         });
       }
     });
   }
 
-  var status;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     DateTime now = DateTime.now();
     String formattedDate = "${now.day}-${now.month}-${now.year}";
     _dateController2.text = formattedDate;
+
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -72,12 +65,10 @@ class _ReportTankerState extends State<ReportTanker> {
               color: Colors.blue[50],
               borderRadius: BorderRadius.circular(15),
             ),
-            width: MediaQuery.of(context).size.width,
+            width: screenWidth,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -85,9 +76,7 @@ class _ReportTankerState extends State<ReportTanker> {
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 const SizedBox(
                   width: 320,
                   child: Row(
@@ -98,9 +87,7 @@ class _ReportTankerState extends State<ReportTanker> {
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       )),
-                      SizedBox(
-                        width: 20,
-                      ),
+                      SizedBox(width: 20),
                       Expanded(
                           child: Text(
                         "To Date:",
@@ -110,9 +97,7 @@ class _ReportTankerState extends State<ReportTanker> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Form(
                   key: _formKey,
                   child: Row(
@@ -127,12 +112,8 @@ class _ReportTankerState extends State<ReportTanker> {
                             labelText: 'Date',
                             suffixIcon: Icon(Icons.calendar_today),
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter date';
-                            }
-                            return null;
-                          },
+                          validator: (value) =>
+                              value!.isEmpty ? 'Please enter date' : null,
                           onTap: () {
                             DatePicker.showDatePicker(
                               context,
@@ -149,9 +130,7 @@ class _ReportTankerState extends State<ReportTanker> {
                           },
                         ),
                       ),
-                      const SizedBox(
-                        width: 30,
-                      ),
+                      const SizedBox(width: 30),
                       Expanded(
                         child: TextFormField(
                           readOnly: true,
@@ -162,12 +141,8 @@ class _ReportTankerState extends State<ReportTanker> {
                             labelText: 'Date',
                             suffixIcon: Icon(Icons.calendar_today),
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter date';
-                            }
-                            return null;
-                          },
+                          validator: (value) =>
+                              value!.isEmpty ? 'Please enter date' : null,
                           onTap: () {
                             DatePicker.showDatePicker(
                               context,
@@ -187,9 +162,7 @@ class _ReportTankerState extends State<ReportTanker> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 TypeAheadField(
                   textFieldConfiguration: TextFieldConfiguration(
                     decoration: const InputDecoration(
@@ -207,9 +180,7 @@ class _ReportTankerState extends State<ReportTanker> {
                         .toList();
                   },
                   itemBuilder: (context, suggestion) {
-                    return ListTile(
-                      title: Text(suggestion),
-                    );
+                    return ListTile(title: Text(suggestion));
                   },
                   onSuggestionSelected: (suggestion) {
                     setState(() {
@@ -221,15 +192,10 @@ class _ReportTankerState extends State<ReportTanker> {
                       selectedTankerId = selectedTanker['id'].toString();
                     });
                   },
-                  noItemsFoundBuilder: (context) {
-                    return const ListTile(
-                      title: Text('No item found'),
-                    );
-                  },
+                  noItemsFoundBuilder: (context) =>
+                      const ListTile(title: Text('No item found')),
                 ),
-                const SizedBox(
-                  height: 70,
-                ),
+                const SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -239,13 +205,8 @@ class _ReportTankerState extends State<ReportTanker> {
                           _dateController1.text,
                           _dateController2.text,
                         ).then((data) {
-                          if (data['error'] == true) {
-                            check = "false";
-                            _dataList = data['data'];
-                          } else if (data['error'] == false) {
-                            setState(() {
-                              _dataList = data['data'];
-                            });
+                          if (data['error'] == false) {
+                            setState(() => _dataList = data['data']);
                           }
                         });
                       } else {
@@ -253,13 +214,8 @@ class _ReportTankerState extends State<ReportTanker> {
                           _dateController1.text,
                           _dateController2.text,
                         ).then((data) {
-                          if (data['error'] == true) {
-                            check = "false";
-                            _dataList = data['data'];
-                          } else if (data['error'] == false) {
-                            setState(() {
-                              _dataList = data['data'];
-                            });
+                          if (data['error'] == false) {
+                            setState(() => _dataList = data['data']);
                           }
                         });
                       }
@@ -267,25 +223,18 @@ class _ReportTankerState extends State<ReportTanker> {
                   },
                   child: const Text('Submit'),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 _dataList.isEmpty
-                    // check == "false"
                     ? const Center(
                         child: Column(
                           children: [
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: 30),
                             Text(
                               "No Reports Available ",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: 30),
                           ],
                         ),
                       )
@@ -300,369 +249,64 @@ class _ReportTankerState extends State<ReportTanker> {
                           String formattedDate =
                               DateFormat('dd-MM-yyyy').format(date);
                           status = data['status'];
+
                           return SizedBox(
-                            height: 400,
+                            height: screenHeight * 0.55, // ✅ responsive height
                             child: Column(
                               children: [
+                                _buildRow("Serial No:", (index + 1).toString(),
+                                    screenWidth),
+                                _buildRow("Reciept No:",
+                                    "STP/2023/${data['id']}", screenWidth),
+                                _buildRow("Order Completed on:", formattedDate,
+                                    screenWidth),
+                                _buildRow(
+                                    "Water Quantity:",
+                                    "${data['ni_water_capacity']} Liters",
+                                    screenWidth),
+                                _buildRow("Tanker No:", data['ni_tanker_no'],
+                                    screenWidth),
+                                _buildRow("Site Address:",
+                                    data['address'].toString(), screenWidth),
+                                _buildRow("STP Name:", data['ni_nearest_stp'],
+                                    screenWidth),
                                 Row(
                                   children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Serial No:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
+                                    SizedBox(
+                                      width: screenWidth *
+                                          0.55, // ✅ responsive width
+                                      child: const Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 30,
+                                            top: 10,
+                                            bottom: 10,
+                                            right: 10),
+                                        child: Text(
+                                          "Status:",
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                     Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            (index + 1).toString(),
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Reciept No:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
+                                      child: Text(
+                                        status.toString() == "false"
+                                            ? "Pending"
+                                            : status.toString() == "null"
+                                                ? "Cancelled"
+                                                : "Completed",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: status.toString() == "null"
+                                              ? Colors.red
+                                              : Colors.black,
+                                        ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "STP/2023/${data['id'].toString()}",
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Order Completed on:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            formattedDate,
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Water Quantity:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${data['ni_water_capacity']} Liters",
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Tanker No :",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            data['ni_tanker_no'],
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Site Address:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            data['address'].toString(),
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "STP Name:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            data['ni_nearest_stp'],
-                                            style:
-                                                const TextStyle(fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 210,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 30,
-                                                top: 10,
-                                                bottom: 10,
-                                                right: 10),
-                                            child: Text(
-                                              "Status:",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          if (status.toString() == "false")
-                                            const Text(
-                                              "Pending",
-                                              style: TextStyle(fontSize: 17),
-                                            ),
-                                          if (status.toString() == "null")
-                                            const Text(
-                                              "Cancelled",
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 17),
-                                            ),
-                                          if (status.toString() == "true")
-                                            const Text(
-                                              "Complete",
-                                              style: TextStyle(fontSize: 17),
-                                            ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                const SizedBox(height: 10),
                                 const Divider(
                                   height: 2,
                                   color: Colors.black,
@@ -679,15 +323,27 @@ class _ReportTankerState extends State<ReportTanker> {
           ),
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   decoration: const BoxDecoration(
-      //     image: DecorationImage(
-      //       image: AssetImage(
-      //           'assets/bottomimage.png'), // Replace with your image path
-      //     ),
-      //   ),
-      //   height: 70, // Adjust the height of the image
-      // ),
+    );
+  }
+
+  /// 🔹 Reusable row
+  Widget _buildRow(String label, String value, double screenWidth) {
+    return Row(
+      children: [
+        SizedBox(
+          width: screenWidth * 0.55, // ✅ responsive width
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 30, top: 10, bottom: 10, right: 10),
+            child: Text(label,
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+          ),
+        ),
+        Expanded(
+          child: Text(value, style: const TextStyle(fontSize: 17)),
+        ),
+      ],
     );
   }
 }
