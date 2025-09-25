@@ -479,6 +479,10 @@ class _AddVehicleState extends State<AddVehicle> {
                                 .map((id) => getStpNameById(id))
                                 .toList(),
                             decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color(0xff3e50b5),
+                              ),
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 20),
                             ),
