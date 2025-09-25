@@ -62,6 +62,12 @@ class MyApp extends StatelessWidget {
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.red,
         ),
+        cardTheme: const CardTheme(
+          color: Colors.white, // 👈 Always white
+          // surfaceTintColor: Colors.white, // 👈 Removes pink tint
+          // shadowColor: Colors.black12, // 👈 Optional: softer shadow
+          // elevation: 2, // 👈 Optional: light shadow
+        ),
       ),
       home: const SpalshScreen(),
       debugShowCheckedModeBanner: false,
